@@ -26,29 +26,52 @@ void producto_cruz(int* v1, int* v2, int* v3) {
     }
 } 
 
-void vector_x_matriz(int** mat, int n , int m){
-    for(int i=0; i<n; i++){
-        for(int j=0; j<m; j++){
-            cout << mat[i][j]<<"\t ";
+void matriz_x_vector(int m[3][3], int* v, int* v_nuevo){
+    for(int i=0; i <3; i++) {
+        for(int j=0; j<3; j++) {
+            v_nuevo[i] += m[i][j]*v[j];
         }
     }
 }
 
+*/void vector_x_matriz(int m[3][3], int*v, int* v_new){
+    
+}
+/*
 
 
 
 int main() {
-    int vector1[3] = {1,2,3};
+    /*int vector1[3] = {1,2,3};
     int vector2[3] = {4,5,6};
     int vector_resultado[3] = {0,0,0};
+    producto_cruz(vector1, vector2, vector_resultado);*/
     
-    producto_cruz(vector1, vector2, vector_resultado);
-    
-    cout << "\n";
+    /*cout << "\n";
     for(int i=0; i<3; i++) {
         cout << vector_resultado[i] << " ";
     }
-    //cout << producto_punto(vector1, vector2);
+    //cout << producto_punto(vector1, vector2);*/
+    
+    //matriz por vector
+    int matriz[3][3];
+    
+    for(int i = 0; i<3; i++) {
+        for(int j = 0; j<3; j++) {
+            matriz[i][j] = i*3 + j;
+            cout << matriz[i][j] << " ";
+        }
+        cout << "\n";
+    }
+    
+    int vector[3] = {0,1,2};
+    int v_resultado[3] = {0,0,0};
+    
+    matriz_x_vector(matriz, vector, v_resultado);
+    
+    for(int i= 0; i<3; i++) {
+        cout << v_resultado[i]<< "\n";
+    }
     
     
     return 0;
