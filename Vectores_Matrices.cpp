@@ -10,19 +10,12 @@ int producto_punto(int* v1, int*v2) {
        return producto;
 }
 
-int vect_index(int index) {
-    if(index < 3) {
-        return index;
-    } else {
-        return index % 3;
-    }
-}
 
 void producto_cruz(int* v1, int* v2, int* v3) {
     int x,y,z;
     x = v1[1]*v2[2] - v1[2]*v2[1];
     for(int i=0; i<3; i++) {
-        v3[i] = v1[vect_index(i+1)]*v2[vect_index(i+2)] - v1[vect_index(i+2)]*v2[vect_index(i+1)];
+        v3[i] = v1[(i+1) % 3]*v2[(i+2) % 3] - v1[(i+2) % 3]*v2[(i+1) % 3];
     }
 } 
 
