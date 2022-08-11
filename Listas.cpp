@@ -1,4 +1,6 @@
 
+// Online C++ Compiler - Build, Compile and Run your C++ programs online in your favorite browser
+
 #include<iostream>
 #include <math.h> 
 
@@ -68,6 +70,15 @@ public:
 		setY(f.y);
 		return *this; 
 	}
+	
+	string to_string() {
+		return "("+std::to_string(x) + "," + std::to_string(y)+")";
+	}
+
+
+	friend std::ostream& operator<<(std::ostream& os, Point& b) {
+		return os << b.to_string();
+	}
 
 };
 
@@ -108,6 +119,15 @@ public:
       pointer = p;
   }
     
+    string to_string() {
+		return getDato()->to_string();
+	}
+
+
+	friend std::ostream& operator<<(std::ostream& os, Nodo& b) {
+		return os << b.to_string();
+	}
+    
 };
 
 class Lista{
@@ -123,15 +143,14 @@ public:
     }
     
     ~Lista(){
-       Nodo* t = ptr;
-       Nodo* n;
-       while(t->getNext() != NULL){
+        Nodo* t = ptr;
+        Nodo* n;
+        while(t->getNext() != NULL){
             n = t;
-            t = t-> getNext();
+            t = t->getNext();    
             delete n;
-       }
-       delete t;
-    
+        }
+        delete t;
     }
     
     void push_back(Point* d){
@@ -145,24 +164,13 @@ public:
                 t = t->getNext();    
             }
             t->setNext(new Nodo(d));
+            size++;
         }
         
     }
     
     int getSize(){
         return size;
-    }
-
-    Nodo* get(int i){
-        if (i<size && i>=0){
-        Nodo*n = ptr;
-        for(int x = 0; x<i; x++){
-            n = n->getNext();
-        }
-        return n;
-        }else{
-            throw invalid_argument("La posición no existe");
-        }
     }
     
     void print(){
@@ -171,12 +179,62 @@ public:
         }else{
             Nodo* t = ptr;
             do{
-                cout<<"("<<(*t).getDato()->getX()<<", "<<t->getDato()->getY()<<"), ";
+                //cout<<"("<<(*t).getDato()->getX()<<", "<<t->getDato()->getY()<<"), ";
+                cout<<(*t)<<", ";
                 t = t->getNext();
                 
             }while(t != NULL);
             cout<<endl;
         }
+    }
+    
+    Nodo* get(int i){
+        if(i < size && i>=0){
+            Nodo* n = ptr;
+            for(int x = 0; x<i;x++){
+                n = n->getNext();
+            }
+            return n;
+        }else{
+            //throw invalid_argument("La posicion no existe");
+            if(size == 0){
+                cout<<"La lista está vacía";
+            }else{
+                cout<<"La posicion no existe";
+            }
+            return NULL;
+        }
+        
+    }
+    
+    void insert(Point* p, int pos){
+        if(pos >= 0 && pos <= size){
+            //Si la lista está vacía o si se quiere insertar el nodo al final
+            //se usa el método push_back
+            if(size == 0 || pos == size){ 
+                push_back(p);
+            }else{
+                Nodo* n = new Nodo(p);
+                //Si se quiere insertar el nodo de primero en la lista
+                if(pos == 0){
+                    n->setNext(ptr);
+                    ptr = n;
+                }else{
+                    Nodo* t = get(pos-1);
+                    n->setNext(t->getNext());
+                    t->setNext(n);
+                }
+                size++;
+            }
+        }else{
+            throw invalid_argument("La posicion no existe");
+        }
+        
+    }
+    
+    void remove(int pos){
+        
+        
     }
     
 };
@@ -200,5 +258,22 @@ int main()
    }
    
    l.print();
+   
+   cout<<(*l.get(2)->getDato())<<endl;
+   cout<<(*l.get(2))<<endl;
+   
+   l.insert(new Point(20,20),5);
+   
+   l.print();
+   
+   Lista l2 = Lista();
+   
+   //l2.insert(new Point(20,20),5);
+   l2.insert(new Point(20,20),0);
+   l2.insert(new Point(19,19),0);
+   
+   l2.print();
+   
+   
     return 0;
 }
