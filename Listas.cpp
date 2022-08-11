@@ -1,3 +1,4 @@
+
 #include<iostream>
 #include <math.h> 
 
@@ -122,14 +123,15 @@ public:
     }
     
     ~Lista(){
-      Nodo* t = ptr;
-      Nodo* n;
-      while(t->getNext() != NULL){
-          n = t;
-          t = t-> getNext();
-          delete n;
-      }
-      delete t;
+       Nodo* t = ptr;
+       Nodo* n;
+       while(t->getNext() != NULL){
+            n = t;
+            t = t-> getNext();
+            delete n;
+       }
+       delete t;
+    
     }
     
     void push_back(Point* d){
@@ -143,7 +145,6 @@ public:
                 t = t->getNext();    
             }
             t->setNext(new Nodo(d));
-            size++;
         }
         
     }
@@ -151,7 +152,7 @@ public:
     int getSize(){
         return size;
     }
-    
+
     Nodo* get(int i){
         if (i<size && i>=0){
         Nodo*n = ptr;
@@ -163,25 +164,6 @@ public:
             throw invalid_argument("La posición no existe");
         }
     }
-    
-    void insert(Point* p, int pos){
-        if(pos >= 0 && pos <= size){
-            if(size == 0 || pos == size){
-                push_back(p);
-            }else{
-                Nodo* n = new Nodo(p);
-            }   if (pos==0){
-                n->setNext(ptr);
-                ptr=n;
-            }else{
-                   Nodo* t = get(pos-1)
-        }
-    }
-    
-    /* void remove(int pos)
-    
-    */
- 
     
     void print(){
         if(size == 0){
@@ -212,7 +194,6 @@ int main()
    l.push_back(new Point(2,2));
    
    l.print();
-   
    
    for(int i = 3; i<10; i++){
        l.push_back(new Point(i,i));
