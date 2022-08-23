@@ -261,8 +261,7 @@ public:
         }
     }
     
-    // FALTA EL REVERSE
-    /*Lista reverse() {
+        Lista reverse() {
         Lista r = Lista();
         Nodo* t = ptr;
         do{
@@ -282,21 +281,21 @@ public:
         return r;
     }
     
-    void reverse(){
+    void reverse_list(){
         for(int i = 1;i<size;i++){
             Nodo* l = getNodo(i-1);
-            //cout << l->getDato()->getX();
+            cout << l->getDato()->getX();
             cout<< i;
             Nodo* n = l->getNext();
             ptr = n;
-           //Nodo* r = ptr;
+            Nodo* r = ptr;
             l->setNext(n->getNext());
             n->setNext(l);
             print();
             
-            // usar insert cada VEZ EN PUESTO +1
+        
         }
-    }*/
+    }
     
     void print(){
         if(size == 0){
@@ -320,23 +319,28 @@ int main()
    Lista l = Lista();
    
    // PUSH BACK
+   cout<<"Initial list"<<endl;
    for(int i = 1; i<11; i++){
        l.push_back(new Point(i,i));
    }
    l.print();
    
-   // INSERT
-   //l.insert(new Point(10,10), 6);
-   //l.print();
+    //INSERT
+   cout<<"Insert method"<<endl;
+   l.insert(new Point(10,10), 6);
+   l.print();
    
    // REMOVE
-   //l.remove_nodo(5);
-   //l.print();
+   cout<<"Remove method"<<endl;
+   l.remove_nodo(5);
+   l.print();
    
-   //Lista c = Lista();
-   //l.reverse(); // error loco
-   //l.print();
-   //c.print();
+   //REVERSE
+   Lista c = Lista();
+   cout<<"Reverse method"<<endl;
+   l.reverse_list();
+   l.print();
+   c.print();
    
    return 0;
 }
