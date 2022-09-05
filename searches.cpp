@@ -18,7 +18,7 @@ int search(int v[], int n, int x, int i){
 int index(int v[], int n, int vi[], int m, int x){
     int k = x/1000;
     int i = vi[k];
-    int j = vi[k+1]
+    int j = vi[k+1];
     while(i<j && v[i] != x){
         i++;
     }
