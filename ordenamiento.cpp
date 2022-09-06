@@ -17,6 +17,27 @@ void selection_sort(int v[], int* vaux, int n){
 
 }
 
+void double_select_sort(vector<int>& v) {
+  int x_temp, i_min, i_max;
+  int len = v.size();
+
+  for (int i = 0; i < len/2; i++) {
+    i_min = i;
+    i_max = i;
+    for (int j = i; j < len-i; j++) {
+      if (v.at(j) < v.at(i_min)) i_min = j;
+      if (v.at(j) > v.at(i_max)) i_max = j;
+    }
+    x_temp = v.at(i);
+    v.at(i) = v.at(i_min);
+    v.at(i_min) = x_temp;
+    
+    x_temp = v.at(len-i-1);
+    v.at(len-i-1) = v.at(i_max);
+    v.at(i_max) = x_temp;
+  }
+}
+
 int main() {
 
     int vector[] = {2,3,5,3,6,8,9,12};
