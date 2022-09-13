@@ -2,7 +2,6 @@
 #include <math.h> 
 #include <stdexcept>
 #include <string>
-
 using namespace std;
 
 class Point {
