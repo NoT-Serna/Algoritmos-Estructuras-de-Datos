@@ -19,11 +19,11 @@ int partition(vector<int>* vec_1, int ini, int fin){
      
  }
  
- void quick_sort(int* vec_1, int ini , int fin){
+ void quick_sort(vector<int>* vec_1, int ini , int fin){
      if(ini<fin){
-       int i = partition(&vec_1, ini, fin);
-         quick_sort(&vec_1, ini, i-1);
-         quick_sort(&vec_1, i+1, fin);
+       int i = partition(vec_1, ini, fin);
+         quick_sort(vec_1, ini, i-1);
+         quick_sort(vec_1, i+1, fin);
      }
  }
  
@@ -33,7 +33,7 @@ int main() {
     int myints[] = {2,4,7,9,1,8,6,5,3};
     vector<int> vec_1;
     vec_1.assign(myints,myints+9);
-    partition(&vec_1, 0, vec_1.size()-1);
+    quick_sort(&vec_1, 0, vec_1.size()-1);
     
     for(int i = 0; i<vec_1.size(); i++){
         cout<<vec_1.at(i)<<" ";
