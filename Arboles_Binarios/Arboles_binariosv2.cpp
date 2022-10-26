@@ -17,6 +17,16 @@ Node* newNode(int idata){
     return node;
 }
 
+bool isleaf(Node*){
+    if(node->left= NULL || node->right=NULL){
+        return true;
+
+    }else{
+        return false;
+
+    }
+}
+
 int main(){
 
     Node *root = newNode(1);
