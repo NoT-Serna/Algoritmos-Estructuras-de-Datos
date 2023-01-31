@@ -153,7 +153,7 @@ int main() {
         }
     }
     
-    cout << "Has salido del programa."
+    cout << "Has salido del programa.";
     
     return 0;
 }
