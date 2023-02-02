@@ -31,6 +31,7 @@ int main()
         cout<<v[i]<<"\t";
     }
     cout<<"\n";
+    /*
     tam = insertar(v,tam,10,5);
     
     for(int i=0; i<tam;i++){
@@ -43,6 +44,7 @@ int main()
     for(int i=0; i<tam;i++){
         cout<<v[i]<<"\t";
     }
+    */
     
     return 0;
 }
