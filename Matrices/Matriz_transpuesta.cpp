@@ -34,6 +34,13 @@ int main(){
         cout<<endl;
     }
     
+    //Imprmir diagonal secundaria
+    for(int j = 0; j<c; j++){
+        cout<<m[j][c-1-j]<<" ";
+    }
+    cout<<"\n";
+    cout<<endl;
+    
     
     
     
