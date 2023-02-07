@@ -1,5 +1,4 @@
 #include <iostream>
-
 using namespace std;
 
 int main(){
@@ -23,7 +22,7 @@ int main(){
         }
         cout<<endl;
     }
-    cout<<"\n";
+    cout<<"\n"; 
     
     //Transpuesta de una matriz
     cout<<"Matriz transpuesta"<<"\n";
@@ -34,12 +33,78 @@ int main(){
         cout<<endl;
     }
     
+    cout<<"\n";
+    
+    //Imprimir diagonal primaria
+    cout<<"Diagonal principal: "<<" ";
+    for(int i = 0; i<f; i++){
+        for(int j = 0; j<c; j++){
+            cout<<m[j][i=j]<<"\t";
+        }
+        cout<<endl;
+    }
+    
+    
+    
     //Imprmir diagonal secundaria
+    cout<<"Diagonal secundaria: "<<" ";
     for(int j = 0; j<c; j++){
-        cout<<m[j][c-1-j]<<" ";
+        cout<<m[j][c-1-j]<<"\t";
+    }
+    
+    cout<<"\n";
+    
+    
+    //Triángulo Superior
+    cout<<"Triángulo Superior: "<<"\n";
+    for(int i = 0; i<f; i++){
+        for(int j = 0; j<c; j++){
+            if(j>=i){
+                cout<<m[j][i]<<"\t";
+            }else{
+                cout<<" " <<"\t";
+            }
+        }
+        cout<<endl;
     }
     cout<<"\n";
-    cout<<endl;
+    
+    //Triángulo Inferior
+    cout<<"Triángulo Inferior: "<<"\n";
+    for(int i = 0; i<f; i++){
+        for(int j = 0; j<c; j++){
+            if(j<=i){
+                cout<<m[j][i]<<"\t";
+            }else{
+                cout<<" "<<"\t";
+            }
+        }
+        cout<<endl;
+    }
+    
+    //Triangulo Superior Primario
+    for(int i = 0; i<f; i++){
+        for(int j = 0; j<c; j++){
+            if(j<=c-1-i){
+                cout<<m[j][i]<<"\t";
+            }else{
+                cout<<" "<<"\t";
+            }
+        }
+        cout<<endl;
+    }
+    
+    //Triangulo Superior Secundario
+    for(int i = 0; i<f; i++){
+        for(int j = 0; j<c; j++){
+            if(j>=c-1-i){
+                cout<<m[j][i]<<"\t";
+            }else{
+                cout<<" "<<"\t";
+            }
+        }
+        cout<<endl;
+    }
     
     
     
