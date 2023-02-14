@@ -75,6 +75,33 @@ public:
             size++;
         }
     }
+
+    void move_left(int x){
+        for(int i = 0; i > x; i--){
+            v[i] = v[i-1];
+        }
+    }
+    
+    void move_right(int x){
+        for(int i = 0; i<capacity; i++){
+            v[i] = v[i+1];
+        }
+    }
+
+
+    void insert(T x , int pos){
+        if(size ==  pos){
+            push_back(x);
+        }else{
+            if(pos < size){
+                move_right(pos);
+                v[pos] = x;
+
+                
+            }
+
+        }
+    }
     
     
     
@@ -85,12 +112,18 @@ public:
 
 
 int main(){
+    
     Vector<int> v;
 
     
-    for(int i = 0; i<20; i++){
+    for(int i = 0; i<5; i++){
         v.push_back(i);
     }
+    v.print_vect();
+    cout<<endl;
+    
+
+    v.insert(10,3);
     v.print_vect();
 
     
