@@ -83,7 +83,7 @@ public:
     }
     
     void move_right(int x){
-        for(int i = 0; i<capacity; i++){
+        for(int i = 0; i<x; i++){
             v[i] = v[i+1];
         }
     }
@@ -94,17 +94,25 @@ public:
             push_back(x);
         }else{
             if(pos < size){
-                move_left(pos);
-                v[pos] = x;
-
-                
+                move_right(pos);
+                v[pos] = x;       
             }
-
         }
     }
-    
 
- 
+    bool search(T get){
+        for(int i = 0; i<size; i++){
+            if(get == v[i]){
+                cout<<"el número "<<get<<" fue encontrado"<<"\n";
+                return true;
+            }
+        }
+        cout<<"No encontrado";
+        return false;
+        
+    }
+
+
     
 };
 
@@ -117,15 +125,18 @@ int main(){
     Vector<int> v;
 
     
-    for(int i = 0; i<5; i++){
+    for(int i = 0; i<10; i++){
         v.push_back(i);
     }
     v.print_vect();
     cout<<endl;
     
 
-    v.insert(10,2);
+    v.insert(234556,1);
     v.print_vect();
+    cout<<endl;
+
+    v.search(99);
 
 
 
