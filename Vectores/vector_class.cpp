@@ -94,7 +94,7 @@ public:
             push_back(x);
         }else{
             if(pos < size){
-                move_right(pos);
+                move_left(pos);
                 v[pos] = x;
 
                 
@@ -103,7 +103,8 @@ public:
         }
     }
     
-    
+
+ 
     
 };
 
@@ -123,8 +124,10 @@ int main(){
     cout<<endl;
     
 
-    v.insert(10,3);
+    v.insert(10,2);
     v.print_vect();
+
+
 
     
     
