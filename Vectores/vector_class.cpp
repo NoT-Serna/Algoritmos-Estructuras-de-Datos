@@ -103,11 +103,11 @@ public:
     bool search(T get){
         for(int i = 0; i<size; i++){
             if(get == v[i]){
-                cout<<"el número "<<get<<" fue encontrado"<<"\n";
+                cout<<"el número "<<get<<" fue encontrado."<<"\n";
                 return true;
             }
         }
-        cout<<"No encontrado";
+        cout<<"El número "<<get<<" no fue encontrado.";
         return false;
         
     }
@@ -122,21 +122,24 @@ public:
 
 int main(){
     
+    //Initializing the array
+    
     Vector<int> v;
 
-    
+    //Printing array & push_back
     for(int i = 0; i<10; i++){
         v.push_back(i);
     }
     v.print_vect();
     cout<<endl;
     
-
-    v.insert(234556,1);
+    //Insert
+    v.insert(4,1);
     v.print_vect();
     cout<<endl;
-
-    v.search(99);
+    
+    //Search
+    v.search(11);
 
 
 
