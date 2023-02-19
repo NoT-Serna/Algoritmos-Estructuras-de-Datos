@@ -112,6 +112,17 @@ public:
         
     }
 
+    bool remove(T get) {
+      for(int i = 0; i<size; i++){
+        if(get ==v[i]){
+            v[i] = v[i-1];
+            size--;
+            return true;
+        }
+    }
+        return false;
+
+    }
 
     
 };
@@ -139,7 +150,11 @@ int main(){
     cout<<endl;
     
     //Search
-    v.search(11);
+    v.search(6);
+
+    //Delete 
+    v.remove(9);
+    v.print_vect();
 
 
 
