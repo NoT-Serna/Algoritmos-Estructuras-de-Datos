@@ -117,9 +117,11 @@ public:
         if(get ==v[i]){
             v[i] = v[i-1];
             size--;
+            cout<<"Eliminado el número: "<<get<<endl;;
             return true;
         }
-    }
+    }   
+        cout<<"El número "<<get<<" no se encuentra en el array: ";
         return false;
 
     }
@@ -138,6 +140,7 @@ int main(){
     Vector<int> v;
 
     //Printing array & push_back
+    cout<<"Original array: " <<"\t";
     for(int i = 0; i<10; i++){
         v.push_back(i);
     }
@@ -145,20 +148,20 @@ int main(){
     cout<<endl;
     
     //Insert
-    v.insert(4,1);
+    cout<<"Insert method: " <<"\t";
+    v.insert(600,1);
     v.print_vect();
     cout<<endl;
     
     //Search
-    v.search(6);
+    cout<<"Search method: " <<"\t";
+    v.search(600);
+    cout<<endl;
 
     //Delete 
-    v.remove(9);
+    cout<<"Delete method: ";
+    v.remove(600);
     v.print_vect();
 
-
-
-    
-    
     return 0;
 }
