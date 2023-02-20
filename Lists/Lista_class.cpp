@@ -1,4 +1,6 @@
 #include<iostream>
+#include<stdexcept>
+#include<string>
 
 using namespace std;
 
@@ -125,6 +127,46 @@ public:
             size++;
         }
     }
+    
+    bool search(T d){
+      Nodo<T>* temp = ptr;
+      while(temp != NULL){
+          if(temp->get_dato() == d){
+              cout<<"Dato encontrado";
+              return true;
+          }
+          temp = temp->get_next();
+      }
+      cout<<"Dato no encontrado";
+      return false;
+    }
+    
+    void remove_nodo(int pos){
+        if(pos < 0 || pos >= size){
+            cout<<"No hay nodo en esta posición";
+        }else if(pos == 0){
+            Nodo<T>* temp = ptr;
+            ptr = temp->get_next();
+            delete temp;
+            size--;
+            
+        }else if(pos == size-1){
+            Nodo<T>* nodo = get_nodo(pos-1);
+            Nodo<T>* temp = nodo->get_next();
+            nodo->set_next();
+            delete temp;
+            size--;
+        }else{
+            Nodo<T>* prev_nodo = get_nodo(pos-1);
+            Nodo<T>* temp = temp;
+            
+            prev_nodo->get_next();
+            temp->set_next(get_nodo(pos+1));
+            delete temp;
+            size--;
+            
+        }
+    }
 
     
     
@@ -143,6 +185,9 @@ int main()
     l.print();
     l.insert(100,1);
     l.print();
+    
+    l.search(2);
+    l.remove_nodo(10);
     
     
     
