@@ -115,7 +115,7 @@ public:
     bool remove(T get) {
       for(int i = 0; i<size; i++){
         if(get ==v[i]){
-            v[i] = v[i-1];
+            v[i] = v[i+1];
             size--;
             cout<<"Eliminado el número: "<<get<<endl;;
             return true;
