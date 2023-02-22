@@ -8,62 +8,64 @@ using namespace std;
 using namespace std;
 
 class Transaccion{
-private:   
     int emp_origen;
     int emp_destino;
-    int monto;
-    
+    int cantidad_monto;
+
 public:
     Transaccion(){
         emp_origen = 0;
         emp_destino = 0;
-        monto = 0;
+        cantidad_monto = 0;
+
     }
-    
-    Transaccion(emp_origen,emp_destino,monto){
+
+    Transaccion(int origen,int destino, int monto){
         emp_origen = origen;
         emp_destino = destino;
-        monto = m;
+        cantidad_monto = monto;
+        
+
     }
-    
-    int get_origen(int origen){
-        return origen;
+    //Getters
+    int get_emp_origen(){
+        return emp_origen;
     }
-    
-    int get_destino(int destino){
-        return destino;
+
+    int get_emp_destino(){
+        return emp_destino;
     }
-    
-    int get_m(){
-        return monto;
+
+    int get_cantidad_monto(){
+        return cantidad_monto;
     }
-    
-    void set_origen(int or){
-        emp_origen = a;
+
+    //Setters
+    void set_emp_origen(int origen){
+        emp_origen = origen;
     }
-    
-    void set_destino(int a){
-        emp_destino = a;
+
+    void set_emp_destino(int destino){
+        emp_destino = destino;
     }
-    
-    void set_monto(int a){
-        monto = a;
+
+    void set_cantidad_monto(int monto){
+        cantidad_monto = monto;
     }
-    
-    
-    Transaccion& operator=(const Transaccion& f) { 
+
+    Transaccion& operator=(const Transaccion& f){
         emp_origen = f.emp_origen;
         emp_destino = f.emp_destino;
-        monto = f.monto;
-        return *this; 
+        cantidad_monto = f.cantidad_monto;
+        return *this;
     }
-  
-  
-  string to_string() {
-        return "("+std::to_string(origen) + "," + std::to_string(destino)+ "," + std::to_string(m)+")";
+
+    string to_string(){
+        return "("+std::to_string(emp_origen) + ", "+ std::to_string(emp_destino)+ ", " + std::to_string(cantidad_monto)+")";
+
     }
-    
-  friend std::ostream& operator<<(std::ostream& os, Transaccion& b) {
+
+    friend std::ostream& operator<<(std::ostream& os, Transaccion b){
         return os << b.to_string();
     }
     
@@ -76,7 +78,7 @@ public:
 template<typename T>
 class Nodo{
 private:
-  T dato;
+  T  dato;
   Nodo* next;
 
 public:
@@ -226,81 +228,42 @@ int main()
     int** mat_emp; //Declaración de la matriz con información alterada, reportada por la empresa, calculada con las transacciones alteradas
     
     
-    Lista<Transaccion> t = Lista();
+    Lista<Transaccion> t;
 
     //Creación de transacciones. Valide que no haya transacciones con un mismo origen y destino, y que el monto no pase del máximo establecido: monto = rand()%100000;
-    for (int i = 0; i<num_trans; i++){
-        
-        
-       int origen = rand()%num_emp;
-        
+    int origen = 0;
+    int destino = 0;
+    int monto = 0;
+
+    for(int i = 0; i< num_trans; i++){
+        int origen = rand()%num_emp;
+        int destino = rand()%num_emp;
+
         while(origen == destino){
             destino = rand()%num_emp;
         }
-         int monto = rand()%100000;
-         
-         t.add(Transaccion(origen,destino,m))
+        int monto = rand()%monto_max;
+        t.push_back(Transaccion(origen,destino,monto));
     }
-        
     
     //Imprimir lista de transacciones originales
     for(int i=0; i<num_trans; i++){
-        cout<<t.get(i)->get_dato()<<endl;
+        cout<<t.get_nodo(i)->get_dato()<<endl;
     }
     
     //Calcular monto total de transacciones entre empresas en mat_bank
-    mat_bank = new int*[num_emp];
-    for(int i = 0; i < num_emp; i++){
-        mat_bank[i] = new int[num_emp];
-    }
-    
-    
     
     //Imprimir la matriz mat_bank
-    
-    for(int i = 0; i<num_emp; i++){
-        for(int j = 0; j < num_emp; j++){
-            mat_bank[i][j] = 0;
-        }
-        cout<<endl;
-    }
 
-    //Alterar las transacciones cuyo indice%error == 0, disminuyendo su valor en 25% (monto*0.75) 
-    for(int i = 0; i<num_trans; i++){
-        if(i%error == 0){
-            int monto = t.get(i)->get_monto();
-            t.get(i)->get_dato.set_monto(monto * 0.75);
-        }
-    
-    }
+    //Alterar las transacciones cuyo indice%error == 0, disminuyendo su valor en 25% (monto*0.75)    
     
     //Imprimir lista de transacciones alteradas
-        for(int i=0; i<num_trans; i++){
-        cout<<t.get(i)->get_dato()<<endl;
-    }
 
     //Calcular monto total de transacciones alteradas entre empresas en mat_alt
-    for(int i = 0; i<num_trans; i++){
-        Transaccion trans = t.get(i)->get_dato();
-        
-        int fila = trans.get_origen();
-        int columna = trans.get_destino();
-        int monto = trans.get_monto();
-        
-        mat_bank[fila][columna] += monto;
-    }
     
     //Imprimir la matriz mat_alt
 
     //Imprimir las diferencias encontradas entre ls matrices
-    /*
-    for(int i=0; i<num_emp; i++){
-        for(int j=0; j<num_emp; j++){
-            if(mat2[i][j] != mat[i][j])
-                cout<<"Diferencia en total de transacciones entre empresas "<<i<<" y "<<j<<" por "<<(mat_alt[i][j]-mat_bank[i][j])<<endl;
-        }
-    }
     
-    */
     return 0;
 }
