@@ -94,6 +94,10 @@ public:
  T get_dato(){
      return dato;
  }
+
+  T* get_dato_ptr(){
+     return &dato;
+ }
  
  void set_dato(T d){
      dato = d;
@@ -220,7 +224,7 @@ int main()
 {
     srand(1234);
     int num_emp = 4; //Número de empresas
-    int num_trans = 100; //Número de transacciones
+    int num_trans = 10; //Número de transacciones
     int error = 16; //Variable para incluir errores en las transacciones
     int monto_max = 100000; //Variable para definir el máximo valor de un monto
     
@@ -251,19 +255,98 @@ int main()
         cout<<t.get_nodo(i)->get_dato()<<endl;
     }
     
-    //Calcular monto total de transacciones entre empresas en mat_bank
-    
-    //Imprimir la matriz mat_bank
+    //Inicializar la matriz mat_bank
+    mat_bank = new int*[num_emp];
+    for(int i = 0; i<num_emp; i++){
+        mat_bank[i] = new int [num_emp];
+    }
 
-    //Alterar las transacciones cuyo indice%error == 0, disminuyendo su valor en 25% (monto*0.75)    
+    for(int i = 0; i<num_emp; i++){
+        for(int j = 0; j<num_emp; j++){
+           mat_bank[i][j] = 0;
+        }
+        cout<<endl;
+    }
+    cout<<endl;
+    
+    //Calcular monto total de transacciones entre empresas en mat_bank
+    for(int i = 0; i<num_trans; i++){
+        Transaccion M = t.get_nodo(i)->get_dato();
+
+        int fil = M.get_emp_origen();
+        int col = M.get_emp_destino();
+        int monto = M.get_cantidad_monto();
+
+        mat_bank[fil][col] += monto;
+    }
+
+    //Imprimir la matriz mat_bank
+    for(int i = 0; i<num_emp; i++){
+        for(int j = 0; j<num_emp; j++){
+            cout<<mat_bank[i][j]<<"\t";
+        }
+        cout<<endl;
+    }
+    cout<<endl;
+
+
+    //Alterar las transacciones cuyo indice%error == 0, disminuyendo su valor en 25% (monto*0.75)
+    for(int i = 0; i<num_trans; i++){
+        if(i % error == 0){
+            int monto = t.get_nodo(i)->get_dato().get_cantidad_monto();
+            t.get_nodo(i)->get_dato_ptr()->set_cantidad_monto(monto*0.75);
+        }
+    }
+
     
     //Imprimir lista de transacciones alteradas
+    for(int i = 0; i<num_trans; i++){
+        cout<<t.get_nodo(i)->get_dato()<<endl;
+    }
+
+    //Inicializar la matriz mat_alt
+    mat_emp = new int*[num_emp];
+    for(int i = 0; i<num_emp; i++){
+        mat_emp[i] = new int[num_emp];
+    }
+
+    for(int i = 0; i<num_emp; i++){
+        for(int j = 0; j<num_emp; j++){
+            mat_emp[i][j] = 0;
+        }
+    }
+
 
     //Calcular monto total de transacciones alteradas entre empresas en mat_alt
+    for(int i = 0; i<num_trans; i++){
+        Transaccion M = t.get_nodo(i)->get_dato();
+
+        int fil = M.get_emp_origen();
+        int col = M.get_emp_destino();
+        int monto = M.get_cantidad_monto();
+
+        mat_emp[fil][col] += monto;
+
+
+    }
+
+    //Imprimir matriz mat_alt
+    for(int i = 0; i<num_emp; i++){
+        for(int j = 0; j<num_emp; j++){
+            cout<<mat_emp[i][j]<<"\t";
+        }
+        cout<<endl;
+    }
+    cout<<endl;
     
-    //Imprimir la matriz mat_alt
 
     //Imprimir las diferencias encontradas entre ls matrices
+    for(int i=0; i<num_emp; i++){
+        for(int j=0; j<num_emp; j++){
+            if(mat_bank[i][j] != mat_emp[i][j])
+                cout<<"Diferencia en total de transacciones entre empresas "<<i<<" y "<<j<<" por "<<(mat_emp[i][j]-mat_bank[i][j])<<endl;
+        }
+    }
     
     return 0;
 }
