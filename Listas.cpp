@@ -266,6 +266,9 @@ int main()
        l.push_back(new Point(i,i));
    }
    l.print();
+
+   l.remove_nodo(5);
+   l.print();
    
     
    

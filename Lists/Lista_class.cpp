@@ -35,6 +35,10 @@ public:
  void set_next(Nodo* n){
      next = n;
  }
+
+ void set_next(){
+    next = NULL;
+ }
  
     
 };
@@ -141,30 +145,29 @@ public:
       return false;
     }
     
-    void remove_nodo(int pos){
-        if(pos < 0 || pos >= size){
-            cout<<"No hay nodo en esta posición";
-        }else if(pos == 0){
+   void remove_nodo(int pos){
+        if (pos < 0 || pos >= size) {
+            throw invalid_argument("No hay ningun nodo que eliminar en esa posicion");
+        } else if(pos == 0) {
             Nodo<T>* temp = ptr;
             ptr = temp->get_next();
             delete temp;
             size--;
+        } else if (pos == size - 1) {
+           Nodo<T>* prev = get_nodo(pos-1);
+           Nodo<T>* temp = prev->get_next();
+           temp->set_next();
+           delete temp;
+           size--;
+        } 
+        else {
+            Nodo<T>* prev = get_nodo(pos-1);
+            Nodo<T>* temp = prev->get_next();
+            Nodo<T>* next = temp->get_next();
             
-        }else if(pos == size-1){
-            Nodo<T>* nodo = get_nodo(pos-1);
-            Nodo<T>* temp = nodo->get_next();
-            nodo->set_next();
+            prev->set_next(next);
             delete temp;
             size--;
-        }else{
-            Nodo<T>* prev_nodo = get_nodo(pos-1);
-            Nodo<T>* temp = temp;
-            
-            prev_nodo->get_next();
-            temp->set_next(get_nodo(pos+1));
-            delete temp;
-            size--;
-            
         }
     }
 
@@ -187,7 +190,9 @@ int main()
     l.print();
     
     l.search(2);
-    l.remove_nodo(10);
+    l.remove_nodo(6);
+    cout<<endl;
+    l.print();
     
     
     
