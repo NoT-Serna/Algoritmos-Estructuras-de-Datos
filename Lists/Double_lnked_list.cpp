@@ -70,7 +70,7 @@ public:
         Nodo<T>* temp = ptr;
         if(ptr != NULL){
             Nodo<T>* temp_next = ptr->get_next();
-            while(temp_next != NULL){
+            while(temp_next != ptr){
                 delete temp;
                 temp = temp_next;
                 temp_next = temp->get_next();
@@ -98,7 +98,6 @@ public:
             }
             return temp;
         }
-        return NULL;
     }
     
     void print(){
@@ -106,7 +105,7 @@ public:
             cout<<"La lista está vacía"<<endl;
         }else{//La lista no está vacía
             Nodo<T>* temp =  ptr;
-            while(temp != NULL){
+            while(temp->get_next() != ptr){
                 cout<<temp->get_dato()<<","<<"\t";
                 temp = temp->get_next();
             }
@@ -136,22 +135,21 @@ public:
     
     void insert(T d, int pos){
         if(pos == 0){
-            Nodo<T>* nodo = get_nodo(pos);
+            Nodo<T>* node = ptr;
             Nodo<T>* new_node = new Nodo<T>(d);
-            new_node->set_next(nodo);
+            Nodo<T>* last_node = ptr->get_prev();
+            new_node->set_next(ptr);
+            node->set_prev(node);
+            node->set_prev(last_node);
+            last_node->set_next(node);
             ptr = new_node;
             size++;
         }else if(pos == size || size == 0){
             push_back(d);
-        }else{
-            Nodo<T>* prev_node = get_nodo(pos-1);
-            Nodo<T>* insert_node = prev_node->get_next();
+        }else
+            Nodo<T>* prev_node = get_node(pos);
+            Nodo<T>* insert_node = new Nod
             
-            Nodo<T>* temp = new Nodo<T>(d);
-            prev_node->set_next(temp);
-            temp->set_next(insert_node);
-            size++;
-        }
     }
     
     bool search(T d){
