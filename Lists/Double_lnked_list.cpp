@@ -41,8 +41,17 @@ public:
      return prev;
  }
  
+ void set_next(){
+    next = NULL;
+ }
+   
+  
  void set_next(Nodo* n){
      next = n;
+ }
+  
+ void set_prev(){
+   prev =   NULL;
  }
  
  void set_prev(Nodo* p){
