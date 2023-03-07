@@ -22,7 +22,10 @@ int binary_search(int v[],int tam, int dato){
     while(ini <= fini){
         mid =(fini+ini)/2;
         if(v[mid] == dato){
+            cout<<endl;
+            cout<<"El dato fue encontrado:  ";
             return dato;
+            
         }else{
             if(v[mid] > dato){
                 fini = mid-1;
@@ -33,6 +36,8 @@ int binary_search(int v[],int tam, int dato){
             }
         }
     }
+    cout<<endl;
+    cout<<"El dato no fue encontrado: ";
     return -1;
     
 }
@@ -48,7 +53,7 @@ int main(){
    }
    print_vec(vec_1,tam);
    
-  cout<<binary_search(vec_1,tam,898989);
+  cout<<binary_search(vec_1,tam,11);
    
    
     return 0;
