@@ -51,7 +51,7 @@ public:
  }
   
  void set_prev(){
-   prev =   NULL;
+   prev =  NULL;
  }
  
  void set_prev(Nodo* p){
@@ -109,6 +109,14 @@ public:
         }
     }
     
+      int getSize(){
+        return size;
+    }
+    
+    void setPtr(Nodo<T>* ptrr) {
+        ptr = ptrr;
+    }
+    
     void print(){
         if(ptr == NULL){//La lista está vacía
             cout<<"La lista está vacía"<<endl;
@@ -155,10 +163,17 @@ public:
             size++;
         }else if(pos == size || size == 0){
             push_back(d);
-        }else
-            Nodo<T>* prev_node = get_node(pos);
-            Nodo<T>* insert_node = new Nod
+        }else{
+            Nodo<T>* prev_nodo = get_nodo(pos);
+            Nodo<T>* insert_nodo = new Nodo<T>(d);
+            Nodo<T>* next_nodo = get_nodo(pos+1);
             
+            prev_nodo->set_next(insert_nodo);
+            insert_nodo->set_prev(prev_nodo);
+            insert_nodo->set_next(next_nodo);
+            next_nodo->set_prev(insert_nodo);
+            size++;
+        }
     }
     
     bool search(T d){
@@ -179,9 +194,12 @@ public:
 int main(){
     Lista<int> l;
     
-    for(int i = 0; i<10; i++){
+    for(int i = 0; i<12; i++){
         l.push_back(i);
     }
+    l.print();
+    
+    l.insert(23,4);
     l.print();
     
     
