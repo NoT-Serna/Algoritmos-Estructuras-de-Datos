@@ -1,7 +1,8 @@
 // Online C++ Compiler - Build, Compile and Run your C++ programs online in your favorite browser
 
 #include<iostream>
-#include <math.h> 
+#include<math.h> 
+#include<string.h>
 
 using namespace std;
 
@@ -10,6 +11,7 @@ class Point {
 //Atributos
     int x;
     int y;
+    Point* pointer;
 public:
     
     //Constructores
@@ -33,6 +35,13 @@ public:
         return y;
     }
 
+    Point* get_next_point(){
+        return pointer;
+    }
+
+
+    
+
 
     //Setters
     void set_x(int xc) {
@@ -42,10 +51,14 @@ public:
     void set_y(int yc) {
         y = yc;
     }
+
+    void set_next(Point* p){
+        pointer = p;
+    }
     
     Point& operator=(const Point& f) { 
-		setX(f.x);
-		setY(f.y);
+		set_x(f.x);
+		set_y(f.y);
 		return *this; 
 	}
 	
@@ -97,7 +110,7 @@ public:
         pointer = p;
     }
     
-    string to_string(){
+    char to_string(){
         return get_dato();
     }
     
@@ -147,45 +160,60 @@ public:
       return pointer;
   }
   
-  void setNext(Nodo* p){
+  void set_next(Nodo* p){
       pointer = p;
   }
   
-  void push_back(string d){
+  void push_back(Point* d){
         
         if(size == 0){
-            tweets = new Tweet(d);
+            point = new Point(*d);
             size++;
         }else{
-            Tweet* t = tweets;
-            while(t->getNext() != NULL){
-                t = t->getNext();    
+            Point* c_1 = point;
+            while(c_1->get_next_point() != NULL){
+                c_1 = c_1->get_next_point();    
             }
-            t->setNext(new Tweet(d));
+            point->set_next(new Point(*d));
             size++;
         }
         
     }
-    
-    
-    
-    string to_string() {
-        string s = getDato()->to_string();
-        s.append(" >> ");
-        Tweet* t = tweets;
-        while(t != NULL){
-            s.append(t->getDato());
-            s.append(" > ");
-            t = t->getNext();
+
+    Point* get(int i){
+        if(i < size && i>=0){
+            Point* p = point;
+            for(int x = 0; x<i; x++){
+                p = p->get_next_point();
+            }
+            return p;
+        }else{
+            if(size == 0){
+                cout<<"La lista de personas está vacía";
+            }else{
+                cout<<"la posicion no existe";
+            }
+            return NULL;
+        }
+
+    }
+
+    char to_string(){
+        char c = get_dato()->to_string();
+        string s(size,c);
+        s.append(">>");
+        Point* p = point;
+        while(p != NULL){
+            s.append(p->set_next(*p));
+            p = p->get_next_point();
         }
         s.append("\n");
-		return s;
-	}
+        return c;
+    }
 
-
-	friend std::ostream& operator<<(std::ostream& os, Nodo& b) {
-		return os << b.to_string();
-	}
+    friend std:: ostream& operator<<(std:: ostream& os, Nodo& b){
+        return os <<b.to_string();
+    }
     
 };
 
@@ -204,27 +232,28 @@ public:
     ~Lista(){
         Nodo* t = ptr;
         Nodo* n;
-        while(t->getNext() != NULL){
+        while(t->get_next() != NULL){
             n = t;
-            t = t->getNext();    
+            t = t->get_next();    
             delete n;
         }
         delete t;
     }
     
-    void push_back(Point* d){
+    void push_back(Persona* d){
         
         if(size == 0){
             ptr = new Nodo(d);
             size++;
         }else{
             Nodo* t = ptr;
-            while(t->getNext() != NULL){
-                t = t->getNext();    
+            while(t->get_next() != NULL){
+                t = t->get_next();    
             }
-            t->setNext(new Nodo(d));
+            t->set_next(new Nodo(d));
             size++;
         }
+        cout<<endl;
         
     }
     
@@ -238,9 +267,8 @@ public:
         }else{
             Nodo* t = ptr;
             do{
-                //cout<<"("<<(*t).getDato()->getX()<<", "<<t->getDato()->getY()<<"), ";
                 cout<<(*t);
-                t = t->getNext();
+                t = t->get_next();
                 
             }while(t != NULL);
             cout<<endl;
@@ -251,7 +279,7 @@ public:
         if(i < size && i>=0){
             Nodo* n = ptr;
             for(int x = 0; x<i;x++){
-                n = n->getNext();
+                n = n->get_next();
             }
             return n;
         }else{
@@ -266,7 +294,7 @@ public:
         
     }
     
-    void insert(Point* p, int pos){
+    void insert(Persona* p, int pos){
         if(pos >= 0 && pos <= size){
             //Si la lista está vacía o si se quiere insertar el nodo al final
             //se usa el método push_back
@@ -276,12 +304,12 @@ public:
                 Nodo* n = new Nodo(p);
                 //Si se quiere insertar el nodo de primero en la lista
                 if(pos == 0){
-                    n->setNext(ptr);
+                    n->set_next(ptr);
                     ptr = n;
                 }else{
                     Nodo* t = get(pos-1);
-                    n->setNext(t->getNext());
-                    t->setNext(n);
+                    n->set_next(t->get_next());
+                    t->set_next(n);
                 }
                 size++;
             }
@@ -300,13 +328,13 @@ public:
             //se usa el método push_back
             if(pos == 0){ 
                 Nodo* t = ptr;
-                ptr = ptr->getNext();
+                ptr = ptr->get_next();
                 delete t;
             }else{
                 Nodo* t = get(pos-1);
-                Nodo* t2 = t->getNext();
+                Nodo* t2 = t->get_next();
                 
-                t->setNext(t2->getNext());
+                t->set_next(t2->get_next());
                 delete t2;
             }
             size--;
@@ -325,18 +353,13 @@ int main()
    
    Lista l = Lista();
    
-   l.push_back(new Point(1,1));
-   
+   l.push_back(new Persona('x'));
    l.print();
-   
-   l.push_back(new Point(2,2));
-   
-   l.print();
-   
-   for(int i = 3; i<10; i++){
-       l.push_back(new Point(i,i));
-   }
 
-   
+
+   l.get(0)->push_back(new Point(3,4));
+   l.print();
+
+
    return 0;
 }

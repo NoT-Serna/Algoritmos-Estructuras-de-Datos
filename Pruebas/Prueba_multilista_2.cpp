@@ -1,6 +1,5 @@
 #include<iostream>
 #include<string>
-#include<tuple>
 #include <math.h> 
 
 using namespace std;
