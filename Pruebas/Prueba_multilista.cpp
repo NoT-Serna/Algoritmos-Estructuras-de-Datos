@@ -39,6 +39,10 @@ public:
         return pointer;
     }
 
+    int get_dato(){
+        return x + y;
+    }
+
 
     
 
@@ -201,14 +205,14 @@ public:
     char to_string(){
         char c = get_dato()->to_string();
         string s(size,c);
-        s.append(">>");
+        s.append(" Persona >>");
         Point* p = point;
         while(p != NULL){
-            s.append(p->set_next(*p));
+            s.append(p->get_next_point()->to_string());
             p = p->get_next_point();
         }
         s.append("\n");
-        return c;
+        return s;
     }
 
     friend std:: ostream& operator<<(std:: ostream& os, Nodo& b){
