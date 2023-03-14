@@ -1,17 +1,17 @@
 #include<iostream>
-#include<string>
-#include <math.h> 
+#include<math.h> 
+#include<string.h>
 
 using namespace std;
 
 class Persona{
 private:
-    char dato;
+    string dato;
     Persona* pointer;
 
 public: 
     Persona(){
-        dato = 0;
+        dato = " ";
         pointer = NULL;
         
     }
@@ -20,16 +20,16 @@ public:
         
     }
     
-    Persona(char d){
+    Persona(string d){
         dato = d;
         pointer = NULL;
     }
     
-    char get_dato(){
+    string get_dato(){
         return dato;
     }
     
-    void set_dato(char d){
+    void set_dato(string d){
         dato = d;
     }
     
@@ -41,7 +41,7 @@ public:
         pointer = p;
     }
     
-    char to_string(){
+    string to_string(){
         return get_dato();
     }
     
@@ -78,8 +78,8 @@ public:
     int get_y() {
         return y;
     }
-    
-    Point* get_next(){
+
+    Point* get_next_point(){
         return pointer;
     }
 
@@ -94,7 +94,7 @@ public:
     void set_y(int yc) {
         y = yc;
     }
-    
+
     void set_next(Point* p){
         pointer = p;
     }
@@ -146,7 +146,6 @@ public:
   Persona* get_dato(){
       return persona;
   }
- 
   
   void set_dato(Persona* p){
       persona = p;
@@ -161,38 +160,53 @@ public:
   }
   
   void push_back(Point* d){
+        
         if(size == 0){
             point = new Point(*d);
             size++;
         }else{
-            Point* p = point;
-            while(p->get_next() != NULL){
-                p = p->get_next();
+            Point* c_1 = point;
+            while(c_1->get_next_point() != NULL){
+                c_1 = c_1->get_next_point();    
             }
-            p->set_next(new Point(*d));
+            point->set_next(new Point(*d));
             size++;
         }
         
     }
-    
+
     Point* get(int i){
         if(i < size && i>=0){
             Point* p = point;
-            for(int j = 0; j<i; j++){
-                p= p->get_next();
+            for(int x = 0; x<i; x++){
+                p = p->get_next_point();
             }
             return p;
         }else{
             if(size == 0){
-                cout<<"La lista de ubicaciones esta vacía ";
+                cout<<"La lista de personas está vacía";
             }else{
-                cout<<"La ubicacion no existe";
+                cout<<"la posicion no existe";
             }
             return NULL;
         }
+
     }
     
+    string to_string(){
+        string s = get_dato()->to_string();
+        s.append(">>");
+        Point* p = point;
+        while(p != NULL){
+           s += p->get_x();
+           s += p->get_y();
+        }
+        return s;
+    }
+
+    
 };
+
 
 class Lista{
     
@@ -230,6 +244,7 @@ public:
             t->set_next(new Nodo(d));
             size++;
         }
+        cout<<endl;
         
     }
     
@@ -243,8 +258,8 @@ public:
         }else{
             Nodo* t = ptr;
             do{
-                cout<<t->get_dato();
-                t = t->get_next();
+                cout<<(*t);
+                t = t -> get_next();
                 
             }while(t != NULL);
             cout<<endl;
@@ -326,11 +341,16 @@ public:
 
 int main()
 {
-    Lista l = Lista();
-    
-    l.push_back(new Persona('x'));
-    l.print();
-    
+   
+   Lista l = Lista();
+   
+   l.push_back(new Persona("Juan"));
+   l.print();
+   
+   l.get(0)->push_back(new Point(1,2));
+   l.print();
+ 
+
 
    return 0;
 }
