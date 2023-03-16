@@ -11,19 +11,16 @@ class Point {
 //Atributos
     int x;
     int y;
-    Point* pointer;
+    Point* next;
+
 public:
     
     //Constructores
     Point(int xc, int yc) {
-        x = xc;
-        y = yc;
+       this-> x = xc;
+       this-> y = yc;
+        next = NULL;
 
-    }
-
-    Point() {
-        x = 0;
-        y = 0;
     }
 
     //Getters
@@ -35,16 +32,15 @@ public:
         return y;
     }
 
-    Point* get_next_point(){
-        return pointer;
+    Point* get_next(){
+        return next;
     }
 
-    int get_dato(){
-        return x + y;
+    Point get_dato_point(){
+        return *this;
     }
 
 
-    
 
 
     //Setters
@@ -57,7 +53,7 @@ public:
     }
 
     void set_next(Point* p){
-        pointer = p;
+        next = p;
     }
     
     Point& operator=(const Point& f) { 
@@ -79,12 +75,12 @@ public:
 
 class Persona{
 private:
-    char dato;
+    string dato;
     Persona* pointer;
 
 public: 
     Persona(){
-        dato = 0;
+        dato = " ";
         pointer = NULL;
         
     }
@@ -93,16 +89,16 @@ public:
         
     }
     
-    Persona(char d){
+    Persona(string d){
         dato = d;
         pointer = NULL;
     }
     
-    char get_dato(){
+    string get_dato(){
         return dato;
     }
     
-    void set_dato(char d){
+    void set_dato(string d){
         dato = d;
     }
     
@@ -114,7 +110,7 @@ public:
         pointer = p;
     }
     
-    char to_string(){
+    string to_string(){
         return get_dato();
     }
     
@@ -142,7 +138,14 @@ public:
   }
   
   ~Nodo(){
-      
+      Point* p = point;
+      Point* p_1;
+      while(p != NULL){
+        p_1 = p;
+        p = p->get_next();
+        delete p_1;
+      }
+      delete point;
   }
   
   Nodo(Persona* p){
@@ -168,17 +171,17 @@ public:
       pointer = p;
   }
   
-  void push_back(Point* d){
+  void push_back(int x, int y){
         
         if(size == 0){
-            point = new Point(*d);
+            point = new Point(x,y);
             size++;
         }else{
             Point* c_1 = point;
-            while(c_1->get_next_point() != NULL){
-                c_1 = c_1->get_next_point();    
+            while(c_1->get_next() != NULL){
+                c_1 = c_1->get_next();    
             }
-            point->set_next(new Point(*d));
+            c_1->set_next(new Point(x,y));
             size++;
         }
         
@@ -188,7 +191,7 @@ public:
         if(i < size && i>=0){
             Point* p = point;
             for(int x = 0; x<i; x++){
-                p = p->get_next_point();
+                p = p->get_next();
             }
             return p;
         }else{
@@ -202,14 +205,13 @@ public:
 
     }
 
-    char to_string(){
-        char c = get_dato()->to_string();
-        string s(size,c);
-        s.append(" Persona >>");
+    string to_string(){
+        string s = get_dato()->to_string();
+        s.append(">>");
         Point* p = point;
         while(p != NULL){
-            s.append(p->get_next_point()->to_string());
-            p = p->get_next_point();
+            s.append(p->get_dato_point().to_string());
+            p = p->get_next();
         }
         s.append("\n");
         return s;
@@ -300,13 +302,10 @@ public:
     
     void insert(Persona* p, int pos){
         if(pos >= 0 && pos <= size){
-            //Si la lista está vacía o si se quiere insertar el nodo al final
-            //se usa el método push_back
             if(size == 0 || pos == size){ 
                 push_back(p);
             }else{
                 Nodo* n = new Nodo(p);
-                //Si se quiere insertar el nodo de primero en la lista
                 if(pos == 0){
                     n->set_next(ptr);
                     ptr = n;
@@ -318,7 +317,6 @@ public:
                 size++;
             }
         }else{
-            //throw invalid_argument("La posicion no existe");
             cout<<"La posicion no existe"<<endl;
             
         }
@@ -328,8 +326,6 @@ public:
     void remove(int pos){
         
         if((pos >= 0 && pos <= size) && size > 0){
-            //Si la lista está vacía o si se quiere insertar el nodo al final
-            //se usa el método push_back
             if(pos == 0){ 
                 Nodo* t = ptr;
                 ptr = ptr->get_next();
@@ -343,7 +339,6 @@ public:
             }
             size--;
         }else{
-            //throw invalid_argument("La posicion no existe o la lista está vacía");
             cout<<"La posicion no existe o la lista está vacía"<<endl;
         }
         
@@ -354,16 +349,22 @@ public:
 
 int main()
 {
-   
    Lista l = Lista();
+
+   l.push_back(new Persona("Juan")); 
+   l.insert(new Persona("David"),1);
+   l.push_back(new Persona("Serna"));
+   l.print();
+
+
+
+   l.get(1)->push_back(2,2);
+   l.get(1)->push_back(4,8);
+   l.get(0)->push_back(4,5);
+   l.get(2)->push_back(3,1);
+   l.print();
+
    
-   l.push_back(new Persona('x'));
-   l.print();
-
-
-   l.get(0)->push_back(new Point(3,4));
-   l.print();
-
 
    return 0;
 }

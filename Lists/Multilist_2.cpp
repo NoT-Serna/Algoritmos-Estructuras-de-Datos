@@ -1,247 +1,368 @@
-#include <iostream>
-#include <string>
+#include<iostream>
+#include<math.h> 
+#include<string.h>
 
 using namespace std;
 
-class Point{
-private:
+class Point {
+
+//Atributos
     int x;
     int y;
     Point* next;
 
 public:
-    Point(int xc, int yc){
-        x = xc;
-        y = yc;
-    }
     
-    Point(){
-        x = 0;
-        y = 0;
+    //Constructores
+    Point(int xc, int yc) {
+       this-> x = xc;
+       this-> y = yc;
+        next = NULL;
+
     }
+
     //Getters
-    
-    int get_x(){
+    int get_x() {
         return x;
     }
-    
-    int get_y(){
+
+    int get_y() {
         return y;
     }
-    
+
     Point* get_next(){
         return next;
     }
-    
+
+    Point get_dato_point(){
+        return *this;
+    }
+
+
+
+
     //Setters
-    void set_x(int xc){
+    void set_x(int xc) {
         x = xc;
     }
-    
-    void set_y(int yc){
+
+    void set_y(int yc) {
         y = yc;
     }
-    
+
     void set_next(Point* p){
         next = p;
     }
     
-    
-    
-    
-};
+    Point& operator=(const Point& f) { 
+		set_x(f.x);
+		set_y(f.y);
+		return *this; 
+	}
+	
+	string to_string() {
+		return "("+std::to_string(x) + "," + std::to_string(y)+")";
+	}
 
-class Lista_Point{
-private:
-    int size = 0;
 
-public:
-    Point* ptr;
-    
-    
-    Lista_Point(){
-        ptr = NULL;
-        size = 0;
-    }
-    
-    ~Lista_Point(){
-        
-    }
-    
-    int get_size(){
-        return size;
-    }
-    
-    void set_size(int tam){
-        size = tam;
-    }
-    
-    Point* get_nodo(int pos) {
-        if(size == 0) {
-            throw invalid_argument("La lista no tienen nodos");
-        } else if (pos >= size || pos < 0) {
-            throw invalid_argument("El nodo no esta en la lista");
-        } else {
-            Point* temp = ptr;
-            for(int i = 0; i < pos; i++) {
-                temp = temp->get_next();
-            }
-            return temp;
-        }
-        return NULL;
-    }
-    
-    void push_back(int x, int y){
-        Point* p_1 = new Point(x,y);
-        if (ptr == NULL){
-            ptr = p_1;
-        }else{
-            Point* temp = ptr;
-            while(temp -> get_next() != NULL){
-                temp = temp->get_next();
-            }
-            temp->set_next(p_1);
-        }
-        size++;
-    }
-    
-    void print(){
-        if(ptr == NULL){//La lista está vacía
-            cout<<"La lista está vacía"<<endl;
-        }else{//La lista no está vacía
-            Point* temp =  ptr;
-            while(temp != NULL){
-                cout<<temp->get_x()<<","<<temp->get_y()<<")"<<"\t";
-                temp = temp->get_next();
-            }
-            cout<<endl;
-        }
-    }
-    
-       void insert(int x, int y, int pos){
-        if(pos == 0){
-            Point* nodo = get_nodo(pos);
-            Point* new_node = new Point(x,y);
-            new_node->set_next(nodo);
-            ptr = new_node;
-            size++;
-        }else if(pos == size || size == 0){
-            push_back(x,y);
-        }else{
-           Point* prev_node = get_nodo(pos-1);
-           Point* insert_node = prev_node->get_next();
-            
-            Point* temp = new Point(x,y);
-            prev_node->set_next(temp);
-            temp->set_next(insert_node);
-            size++;
-        }
-    }
-    
+	friend std::ostream& operator<<(std::ostream& os, Point& b) {
+		return os << b.to_string();
+	}
+
 };
 
 class Persona{
 private:
-    string nombre;
-    int id;
-    Persona* next;
+    string dato;
+    Persona* pointer;
 
-public:
-    Lista_Point l_p;
-    
-    Persona(int info){
-        id = info;
-        next = NULL;
+public: 
+    Persona(){
+        dato = " ";
+        pointer = NULL;
+        
     }
     
     ~Persona(){
         
     }
     
-    void set_dato(int persona){
-        id = persona;
-    }
-    void set_next(Point* p){
-        l_p.ptr = p;
+    Persona(string d){
+        dato = d;
+        pointer = NULL;
     }
     
-    void set_next_persona(Persona* p_1){
-        next = p_1;
+    string get_dato(){
+        return dato;
     }
     
-    int get_dato(){
-        return id;
+    void set_dato(string d){
+        dato = d;
     }
     
-    Point* get_next(){
-        return l_p.ptr;
+    Persona* get_next(){
+        return pointer;
     }
     
-    int get_size(){
-        return l_p.get_size();
+    void set_next(Persona* p){
+        pointer = p;
     }
     
-    Persona* get_next_persona(){
-        return next;
+    string to_string(){
+        return get_dato();
     }
     
+    friend std::ostream& operator<<(std::ostream& os, Persona& b){
+        return os <<b.to_string();
+    }
+};
+
+
+
+class Nodo{
+  
+  Point* point;
+  Nodo* pointer;
+  Persona* persona;
+  int size; 
+  
+public:
+  
+  Nodo(){
+      point = NULL;
+      pointer = NULL;
+      persona = NULL;
+      size = 0;
+  }
+  
+  ~Nodo(){
+      Point* p = point;
+      Point* p_1;
+      while(p != NULL){
+        p_1 = p;
+        p = p->get_next();
+        delete p_1;
+      }
+      delete point;
+  }
+  
+  Nodo(Persona* p){
+      persona = p;
+      pointer = NULL;
+      point = NULL;
+      size = 0;
+  }
     
+  Persona* get_dato(){
+      return persona;
+  }
+  
+  void set_dato(Persona* p){
+      persona = p;
+  }
+  
+  Nodo* get_next(){
+      return pointer;
+  }
+  
+  void set_next(Nodo* p){
+      pointer = p;
+  }
+  
+  void push_back(int x, int y){
+        
+        if(size == 0){
+            point = new Point(x,y);
+            size++;
+        }else{
+            Point* c_1 = point;
+            while(c_1->get_next() != NULL){
+                c_1 = c_1->get_next();    
+            }
+            c_1->set_next(new Point(x,y));
+            size++;
+        }
+        
+    }
+
+    Point* get(int i){
+        if(i < size && i>=0){
+            Point* p = point;
+            for(int x = 0; x<i; x++){
+                p = p->get_next();
+            }
+            return p;
+        }else{
+            if(size == 0){
+                cout<<"La lista de personas está vacía";
+            }else{
+                cout<<"la posicion no existe";
+            }
+            return NULL;
+        }
+
+    }
+
+    string to_string(){
+        string s = get_dato()->to_string();
+        s.append(">>");
+        Point* p = point;
+        while(p != NULL){
+            s.append(p->get_dato_point().to_string());
+            p = p->get_next();
+        }
+        s.append("\n");
+        return s;
+    }
+
+    friend std:: ostream& operator<<(std:: ostream& os, Nodo& b){
+        return os <<b.to_string();
+    }
     
 };
 
-class Lista_Persona{
-public:
-    Persona* ptr;
+class Lista{
+    
+    Nodo* ptr;
     int size;
-    int nodos;
 
-private:
-    Lista_Persona(){
+public:  
+
+    Lista(){
         ptr = NULL;
         size = 0;
-        nodos = 0;
     }
     
-    ~Lista_Persona(){
+    ~Lista(){
+        Nodo* t = ptr;
+        Nodo* n;
+        while(t->get_next() != NULL){
+            n = t;
+            t = t->get_next();    
+            delete n;
+        }
+        delete t;
+    }
+    
+    void push_back(Persona* d){
         
-    }
-    
-   void push_back(int x, int y, int cantidad){
-       Persona* temp = ptr;
-       for(int i = 0; i<cantidad; i++){
-           temp = temp->get_next_persona();
-       }
-            temp->l_p.push_back(x, y);
-   }
-   
-   void push_back_persona(int id){
-          Persona* nueva_persona = new Persona(id);   
-           
-        if (ptr==nullptr){  
-            ptr = nueva_persona;   
-        }else{   
-            Persona* temp = ptr;
-            Persona* prev =nullptr;
-            while(temp!=nullptr && id>temp->get_dato()){   
-                prev =temp;
-                temp = temp -> get_next_persona();    
-            }   
-            if(temp!=ptr){
-                prev->set_next_persona(nueva_persona);    
-                nueva_persona->set_next_persona(temp);
-            }else{
-                nueva_persona->set_next_persona(temp);
-                ptr=nueva_persona;
+        if(size == 0){
+            ptr = new Nodo(d);
+            size++;
+        }else{
+            Nodo* t = ptr;
+            while(t->get_next() != NULL){
+                t = t->get_next();    
             }
+            t->set_next(new Nodo(d));
+            size++;
+        }
+        cout<<endl;
         
-        }   
-       nodos++;  
-   }
+    }
+    
+    int getSize(){
+        return size;
+    }
+    
+    void print(){
+        if(size == 0){
+            cout<<"La lista está vacía"<<endl;
+        }else{
+            Nodo* t = ptr;
+            do{
+                cout<<(*t);
+                t = t->get_next();
+                
+            }while(t != NULL);
+            cout<<endl;
+        }
+    }
+    
+    Nodo* get(int i){
+        if(i < size && i>=0){
+            Nodo* n = ptr;
+            for(int x = 0; x<i;x++){
+                n = n->get_next();
+            }
+            return n;
+        }else{
+            //throw invalid_argument("La posicion no existe");
+            if(size == 0){
+                cout<<"La lista está vacía";
+            }else{
+                cout<<"La posicion no existe";
+            }
+            return NULL;
+        }
+        
+    }
+    
+    void insert(Persona* p, int pos){
+        if(pos >= 0 && pos <= size){
+            if(size == 0 || pos == size){ 
+                push_back(p);
+            }else{
+                Nodo* n = new Nodo(p);
+                if(pos == 0){
+                    n->set_next(ptr);
+                    ptr = n;
+                }else{
+                    Nodo* t = get(pos-1);
+                    n->set_next(t->get_next());
+                    t->set_next(n);
+                }
+                size++;
+            }
+        }else{
+            cout<<"La posicion no existe"<<endl;
+            
+        }
+        
+    }
+    
+    void remove(int pos){
+        
+        if((pos >= 0 && pos <= size) && size > 0){
+            if(pos == 0){ 
+                Nodo* t = ptr;
+                ptr = ptr->get_next();
+                delete t;
+            }else{
+                Nodo* t = get(pos-1);
+                Nodo* t2 = t->get_next();
+                
+                t->set_next(t2->get_next());
+                delete t2;
+            }
+            size--;
+        }else{
+            cout<<"La posicion no existe o la lista está vacía"<<endl;
+        }
+        
+    }
     
 };
 
-int main(){
-    
-    
-    return 0;
+
+int main()
+{
+   Lista l = Lista();
+
+   l.push_back(new Persona("Juan")); 
+   l.insert(new Persona("David"),1);
+   l.push_back(new Persona("Serna"));
+   l.print();
+
+
+
+   l.get(1)->push_back(2,2);
+   l.get(1)->push_back(4,8);
+   l.get(0)->push_back(4,5);
+   l.get(2)->push_back(3,1);
+   l.print();
+
+   
+
+   return 0;
 }
