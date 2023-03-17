@@ -126,19 +126,62 @@ public:
     
     int bubble_sort(){
         int temp, j;
-        for(int i =0; i<size; i++){
-            if(v[i] > v[i+1]){
-                temp = v[i];
-                v[i] = v[i+1];
-                v[i+1] = temp;
-                j++;
-            }else{
-                if(v[i] <= v[i+1]){
-                    j++;
+        for(j = 0; j<size; j++){
+            for(int i =0; i<size-1; i++){
+                if(v[i] > v[i+1]){
+                    temp = v[i];
+                    v[i] = v[i+1];
+                    v[i+1] = temp;
                 }
             }
         }
-        return temp;
+    }
+
+    
+    int insert_sort(){
+        int temp, j;
+        for(int i = 0; i<size; i++){
+            temp = v[i];
+            j = i -1;
+        }
+        while(j>= 0 && v[j] > temp){
+            v[j+1] = v[j];
+            j--;
+        }
+        v[j+1] = temp;
+        
+    }
+    
+    int select_sort(){
+        for(int i = 0; i<size;  i++){
+            int min = i;
+        
+            for(int j = i+1; j<size; j++){
+                if(v[j] < v[min]){
+                    min = j;
+                }
+            }
+            if(min != i){
+                int temp = v[min];
+                v[min] = v[i];
+                v[i] = temp;
+            }
+        }
+        
+    }
+    
+    int shell_sort(){
+        for(int gap = size/2; gap >0; gap/=2){
+            for(int i = gap; i<size; i+=1){
+                int temp = v[i];
+                int j;
+                for(j = i;  j>gap && v[j-gap] > temp; j -= gap){
+                    v[i] = temp;
+                }
+                
+            }
+        }
+        
     }
 
     
@@ -162,9 +205,29 @@ int main(){
     v.print_vect();
     cout<<endl;
     
+    /*
     cout<<"Bubble Sort: "<<"\t";
     v.bubble_sort();
     v.print_vect();
+    cout<<endl;
+    */
+    
+    /*
+    cout<<"Insert Sort: "<<"\t";
+    v.insert_sort();
+    v.print_vect();
+    cout<<endl;
+    */
+    
+    cout<<"Select Sort: "<<"\t";
+    v.select_sort();
+    v.print_vect();
+    cout<<endl;
+    
+    cout<<"Shell Sort: "<<"\t";
+    v.shell_sort();
+    v.print_vect();
+    cout<<endl;
     
     /*
     //Insert
