@@ -183,68 +183,22 @@ public:
         }
         
     }
+    
+    int partition(){
+        int i = get(0)-1;
+        int j = 0;
+        int pivot = get(size);
+        
+        for(j = get(0); j<=size; j++){
+            if(v[j]<pivot){
+                i++;
+                int temp = v[j];
+                v[j] = v[i];
+                v[i] = temp;
+            }
+        }
+        return i;
+    }
 
     
 };
-
-
-
-
-
-int main(){
-    
-    //Initializing the array
-    
-    Vector<int> v;
-    int random = 10;
-    //Printing array & push_back
-    cout<<"Original array: " <<"\t";
-    for(int i = 0; i<10; i++){
-        v.push_back(rand()% random);
-    }
-    v.print_vect();
-    cout<<endl;
-    
-    /*
-    cout<<"Bubble Sort: "<<"\t";
-    v.bubble_sort();
-    v.print_vect();
-    cout<<endl;
-    */
-    
-    /*
-    cout<<"Insert Sort: "<<"\t";
-    v.insert_sort();
-    v.print_vect();
-    cout<<endl;
-    */
-    
-    cout<<"Select Sort: "<<"\t";
-    v.select_sort();
-    v.print_vect();
-    cout<<endl;
-    
-    cout<<"Shell Sort: "<<"\t";
-    v.shell_sort();
-    v.print_vect();
-    cout<<endl;
-    
-    /*
-    //Insert
-    cout<<"Insert method: " <<"\t";
-    v.insert(600,1);
-    v.print_vect();
-    cout<<endl;
-    
-    //Search
-    cout<<"Search method: " <<"\t";
-    v.search(600);
-    cout<<endl;
-
-    //Delete 
-    cout<<"Delete method: ";
-    v.remove(600);
-    v.print_vect();
-    */
-    return 0;
-}
