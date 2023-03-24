@@ -26,10 +26,10 @@ void max_heap(int* v, int n, int i){
 }
 
 void heap_sort(int* v, int n){
-    int max_father = (n/2)-1;
+    int center = (n/2)-1;
     int temp;
     
-    for(int i=max_father; i>=0; i--){
+    for(int i=center; i>=0; i--){
         max_heap(v,n,i);
     }
     
