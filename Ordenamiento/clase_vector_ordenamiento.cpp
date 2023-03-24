@@ -135,6 +135,7 @@ public:
                 }
             }
         }
+        return temp;
     }
 
     
@@ -149,7 +150,6 @@ public:
             j--;
         }
         v[j+1] = temp;
-        
     }
     
     int select_sort(){
@@ -181,15 +181,15 @@ public:
                 
             }
         }
-        
+        return 0;
     }
     
-    int partition(){
-        int i = get(0)-1;
+    int partition(int ini, int fin){
+        int i = ini-1;
         int j = 0;
-        int pivot = get(size);
+        int pivot = fin;
         
-        for(j = get(0); j<=size; j++){
+        for(j = ini; j<=size; j++){
             if(v[j]<pivot){
                 i++;
                 int temp = v[j];
@@ -199,6 +199,41 @@ public:
         }
         return i;
     }
+    
+    void quick_sort(int ini, int fin){
+        if(ini < fin){
+            int mitad = partition(ini,fin);
+            quick_sort(ini,mitad-1);
+            quick_sort(mitad+1, fin);
+        }
+    }
+    
+    
+    
+    
 
     
 };
+
+
+int main(){
+    
+    Vector<int> vec_1;
+    int size = 10;
+    
+    for(int i = 0; i<size; i++){
+        vec_1.push_back(rand()%100);
+    }
+    
+    vec_1.print_vect();
+    cout<<endl;
+
+    
+    cout<<"Quick Sort"<<endl;
+    vec_1.quick_sort(vec_1.get(0), vec_1.get(size));
+    vec_1.print_vect();
+    
+    
+    
+    return 0;
+}
