@@ -1,7 +1,6 @@
 #include<iostream>
 #include<math.h> 
-#include<string.h>
-
+#include<string>
 using namespace std;
 
 class Point {
@@ -116,8 +115,6 @@ public:
         return os <<b.to_string();
     }
 };
-
-
 
 class Nodo{
   
