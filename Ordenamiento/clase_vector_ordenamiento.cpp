@@ -124,8 +124,8 @@ public:
 
     }
     
-    void swap(int*& a, int*& b){
-        int* temp = a;
+    void swap(v[a], v[b]){
+        int temp = a;
         a = b;
         b = temp;
     }
