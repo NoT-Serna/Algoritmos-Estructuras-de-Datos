@@ -1,5 +1,6 @@
 #include <iostream>
 #include <math.h>
+using namespace std;
 
 void swap(int*& a, int*& b){
     int* temp = a;
@@ -9,9 +10,9 @@ void swap(int*& a, int*& b){
 
 void print_vec(int** v, int size){
     for (int i = 0; i < size;  i++){
-        std::cout << "(" << v[i][0] << ", " << v[i][1] << ") ";
+        cout << "(" << v[i][0] << ", " << v[i][1] << ") ";
     }
-    std::cout << std::endl;
+    cout <<endl;
 }
 
 
@@ -25,9 +26,9 @@ float distance_between_points(int* a, int* b){
 
 void print_vec_distance(int** v, int size, int* ref){
     for (int i = 0; i < size;  i++){
-        std::cout << "(" << v[i][0] << ", " << v[i][1] << "). Distance: " << distance_between_points(v[i], ref) << std::endl;
+        cout << "(" << v[i][0] << ", " << v[i][1] << "). Distance: " << distance_between_points(v[i], ref) <<endl;
     }
-    std::cout << std::endl;
+    cout<<endl;
 }
 
 
@@ -67,7 +68,7 @@ int main() {
     
     ///////////////////////////////////
     
-    std::cout << "Ordenamos el vector:\n";
+    cout << "Ordenamos el vector:\n";
     
     int* ref = new int[2];
     ref[0] = 99;
