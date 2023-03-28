@@ -137,12 +137,30 @@ public:
         }
     }
 
+    void cocktail_shake(){
+        int temp, j;
+        for(j = 0; j<size; j++){
+            for(int i = 0; i<size-1; i++){
+                if(v[size-j-1] > v[size-j-2]){
+                    temp = v[size-j-1];
+                    v[size-j-1] =  v[size-j-2];
+                    v[size-j-2] = temp;
+                }
+                if(v[i] > v[i+1]){
+                    temp = v[i];
+                    v[i] = v[i+1];
+                    v[i+1] = temp;
+                    }
+                }
+            }
+        }
+
     
     void insert_sort(){
-    int i, j , temp;
-    for(i = 0; i< 10; i++){
-        temp = v[i];
-        j = i -1;
+        int i, j , temp;
+        for(i = 0; i< 10; i++){
+            temp = v[i];
+            j = i -1;
 
         while(j>= 0 && v[j] > temp){
             v[j+1] = v[j];
@@ -169,19 +187,19 @@ public:
         }
         
     }
-    
+
     void shell_sort(){
-        for(int gap = size/2; gap >0; gap/=2){
-            for(int i = gap; i<size; i+=1){
+        for(int gap = size / 2;  gap > 0; gap /= 2){
+            for(int i = gap; i<size; ++i){
                 int temp = v[i];
-                int j;
-                for(j = i;  j>gap && v[j-gap] > temp; j -= gap){
-                    v[i] = temp;
+                int j = i;
+
+                for(j= i; j>=gap && temp < v[j-gap]; j -= gap){
+                    v[j] = v[j-gap];
+                    v[j] = temp;
                 }
-                
             }
         }
-        
     }
 
 
@@ -206,7 +224,7 @@ int main(){
     v.print_vect();
     cout<<endl;
 
-    v.shell_sort();
+    v.insert_sort();
     v.print_vect();
 
     
