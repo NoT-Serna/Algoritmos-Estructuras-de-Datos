@@ -124,6 +124,12 @@ public:
 
     }
     
+    void swap(int*& a, int*& b){
+        int* temp = a;
+        a = b;
+        b = temp;
+    }
+    
     void bubble_sort(){
         int temp, j;
         for(j = 0; j<size; j++){
