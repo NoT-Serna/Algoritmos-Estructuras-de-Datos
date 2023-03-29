@@ -124,11 +124,6 @@ public:
 
     }
     
-    void swap(v[a], v[b]){
-        int temp = a;
-        a = b;
-        b = temp;
-    }
     
     void bubble_sort(){
         int temp, j;
@@ -208,6 +203,54 @@ public:
         }
     }
 
+    int max_element(){
+        int max = v[0];
+        for(int i = 1; i<size; i++){
+            if(v[i] > max){
+                max = v[i];
+            }
+        }
+        return max;
+    }
+
+    void counting_sort(int size, int place){
+        int max = 10;
+        int output[size];
+        int count[max];
+
+        for(int i = 0; i <max; ++i){
+            count[i] = 0;
+        }
+
+        //Element Counting
+        for(int i = 0; i < size; i++){
+            count[(v[i]/place) % 10] ++;
+        }
+
+        //Cumulative Count
+        for(int i = 1; i<max; i++){
+            count[i] += count[i-1];
+        }
+
+        // Placing elements in sorterd order
+        for(int i = size-1; i >= 0; i--){
+            output[count[(v[i] / place ) % 10] -1 ] = v[i];
+            count[(v[i] / place) % 10]--;
+        }
+
+        for(int i = 0; i<size; i++){
+            v[i] = output[i];
+        }
+
+    }
+
+    void radix_sort(){
+        int max = max_element();
+        for(int place = 1; max / place > 0; place *= 10){
+            counting_sort(size,place);
+        }
+    }
+
 
     
 };
@@ -230,7 +273,7 @@ int main(){
     v.print_vect();
     cout<<endl;
 
-    v.insert_sort();
+    v.radix_sort();
     v.print_vect();
 
     
