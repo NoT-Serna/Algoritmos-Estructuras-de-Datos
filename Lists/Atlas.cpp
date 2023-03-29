@@ -204,6 +204,15 @@ public:
 
     }
 
+    Ciudad* get_capital(string d){
+        pais = new Pais(d);
+        cout<<"La capital de "<< d << " es " << *get(0)<<endl;;
+        return get(0);
+    }
+
+    
+
+
     string to_string(){
         string s = get_dato()->to_string();
         s.append(">>");
@@ -211,6 +220,7 @@ public:
         while(c != NULL){
             s.append(c->get_ciudad().to_string());
             c = c->get_next();
+            s.append(">>");
         }
         s.append("\n");
         return s;
@@ -355,13 +365,24 @@ int main()
    l.insert(new Pais("Italia"),1);
    l.push_back(new Pais("China"));
    
-   l.get(0)->push_back("Bogotá", 500000000);
-   l.get(1)->push_back("Roma", 30);
-   l.get(2)->push_back("Beijing", 40);
+   l.get(0)->push_back("Bogotá", 8000000);
+   l.get(0)->push_back("Medellín", 2569000);
+   l.get(0)->push_back("Cali", 2228000);
+   l.get(0)->get_capital("Colombia");
+
+
+   l.get(1)->push_back("Roma", 2873000);
+   l.get(1)->push_back("Milan", 1352000);
+   l.get(1)->get_capital("Italia");
+
+   l.get(2)->push_back("Beijing", 21540000);
+   l.get(2)->push_back("Shanghái", 26320000);
+   l.get(2)->get_capital("China");
+   cout<<endl;
+
    l.print();
 
 
-   
 
    return 0;
 }
