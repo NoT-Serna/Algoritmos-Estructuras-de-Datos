@@ -11,9 +11,23 @@ string reverse_string(string n){
     }
 }
 
+bool palindrome(string n){
+    int len = n.length();
+    if(len <= 1){
+        return true;
+    }
+
+    if(n[0] == n[len-1]){
+        return palindrome(n.substr(1, len-2));
+    }
+    return false;
+}
+
 
 int main(){
-    string n = "hola";
+    string n = "alla";
     cout<<reverse_string(n);
+    cout<<endl;
+    cout<<palindrome(n);
     return 0;
 }
