@@ -50,7 +50,7 @@ class Pila {
   
   int pop() {
       if(n_size == 0) throw invalid_argument("La pila esta vacia");
-      
+
       Nodo* n = ptr;
       if(n->getNext() != NULL) {
         ptr = n->getNext();
@@ -86,9 +86,10 @@ int main() {
   pila.push('o');
   pila.push('h');
   pila.print();
-  cout<<endl;
   pila.pop();
+  cout<<endl;
   pila.print();
+  cout<<endl;
     
 
   return 0;

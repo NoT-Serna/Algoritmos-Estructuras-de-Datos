@@ -2,36 +2,34 @@
 #include <string>
 using namespace std;
 
-int sascii(string x, int M){
-    char ch[];
-    ch = x.toCharArray();
-    int xlength = x.length();
+void hash_func(string m){
+    char* char_arr = &m[0];
 
-    int i, sum;
-    for(sum=0, i = 0; i<x.length(); i++){
-        sum += ch[i];
+    for(int i = 0; i < m.length(); i++){
+            char_arr[i] = static_cast<int>(char_arr[i]);
+            char_arr[i]++;
+            cout<<char_arr[i];
+            
     }
-    return sum % M;
+}
+
+int hash_func_ver2(string m) {
+    int hash = 0;
+    for (char c : m) {
+        hash += static_cast<int>(c);
+    }
+    return hash;
 }
 
 
-//Simple hash function//
-/*
 int main(){
 
-    return 0;
-    
-}
+    hash_func("hola buenas tardes me llamo Juan David Serna");
+    cout<<endl;
 
-#include <iostream>
-using namespace std;
+    string str = "Juan David Serna";
+    int hash = hash_func_ver2(str);
+    cout << "Hash value of \"" << str << "\" is: " << hash <<endl;
 
-int h(int x) {
-    return x % 16;
-}
-
-int main(){
-    cout<<h(89);
     return 0;
 }
-*/
