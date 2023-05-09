@@ -1,6 +1,9 @@
 #include <math.h>
 
 #include <iostream>
+#include <math.h>
+
+#include <iostream>
 #include <stdexcept>
 #include <string>
 
@@ -81,13 +84,16 @@ class Pila {
 
 int main() {
   Pila pila = Pila();
-  pila.push('a');
-  pila.push('l');
-  pila.push('o');
   pila.push('h');
+  pila.push('o');
+  pila.push('l');
+  pila.push('a');
   pila.print();
   cout<<endl;
   pila.pop();
+  pila.print();
+  cout<<endl;
+  pila.push('X');
   pila.print();
     
 
