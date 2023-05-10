@@ -41,6 +41,12 @@ void recorrido_recursivo(int vec[], int tam, int i){
     cout<<vec[i]<<" ";
 }
 
+void print(int vec[], int tam){
+    for(int i = 0; i<tam; i++){
+        cout<<vec[i]<<" ";
+    }
+}
+
 
 
 int main() {
