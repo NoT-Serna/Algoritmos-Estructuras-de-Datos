@@ -33,10 +33,10 @@ int izq(int i){
 
 void recorrido_recursivo(int vec[], int tam, int i){
     if(izq(i) < tam){
-        recorrido(vec,tam,izq(i));
+        recorrido_recursivo(vec,tam,izq(i));
     }
     if(der(i)< tam){
-        recorrido(vec,tam,der(i));
+        recorrido_recursivo(vec,tam,der(i));
     }
     cout<<vec[i]<<" ";
 }
@@ -53,6 +53,7 @@ int main() {
     
     cout<<"Factorial "<<fact(3)<<endl;
     cout<<"Fibonacci "<<fibonacci(4);
+    cout<<endl;
     
     int tam = 9;
     int vec[tam] = {7,2,4,9,8,3,1,5,6};
