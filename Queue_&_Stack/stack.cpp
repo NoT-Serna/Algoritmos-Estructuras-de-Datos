@@ -1,30 +1,31 @@
 #include <math.h>
-
 #include <iostream>
 #include <stdexcept>
 #include <string>
 
 using namespace std;
 
+template<typename T>
 class Nodo {
-  int n;
+  T n;
   Nodo* next;
 
  public:
-  Nodo(int d) {
+  Nodo(T d) {
     n = d;
     next = NULL;
   }
 
-  int get() { return n; }
+  T get() { return n; }
 
   Nodo* getNext() { return next; }
 
   void setNext(Nodo* p) { next = p; }
 };
 
+template<typename T>
 class Pila {
-  Nodo* ptr;
+  Nodo<T>* ptr;
   int n_size;
 
  public:
@@ -35,13 +36,13 @@ class Pila {
 
   int size() { return n_size; }
 
-  void push(int d) {
+  void push(T d) {
     if (n_size == 0) {
-      ptr = new Nodo(d);
+      ptr = new Nodo<T>(d);
       n_size++;
     } else {
-      Nodo* r = ptr;
-      Nodo* n = new Nodo(d);
+      Nodo<T>* r = ptr;
+      Nodo<T>* n = new Nodo<T>(d);
       n->setNext(r);
       ptr = n;
       n_size++;
@@ -51,14 +52,14 @@ class Pila {
   int pop() {
       if(n_size == 0) throw invalid_argument("La pila esta vacia");
       
-      Nodo* n = ptr;
+      Nodo<T>* n = ptr;
       if(n->getNext() != NULL) {
         ptr = n->getNext();
       } else {
           ptr = NULL;
       }
       n_size--;
-      int value = n->get();
+      T value = n->get();
       delete n;
       
       return value;
@@ -68,7 +69,7 @@ class Pila {
     if (n_size == 0) {
       cout << "La lista está vacía" << endl;
     } else {
-      Nodo* t = ptr;
+      Nodo<T>* t = ptr;
       do {
         cout << "" << (*t).get() << ", ";
         t = t->getNext();
@@ -80,16 +81,17 @@ class Pila {
 };
 
 int main() {
-  Pila pila = Pila();
-  pila.push(1);
-  pila.push(2);
-  pila.push(3);
-  pila.push(4);
+  Pila<char> pila;
+  pila.push('h');
+  pila.push('o');
+  pila.push('o');
+  pila.push('o');
   
   cout << pila.pop() << endl;
   cout << pila.pop() << endl;
   cout << pila.pop() << endl;
   cout << pila.pop() << endl;
-
+  
+  pila.print();
   return 0;
 }
