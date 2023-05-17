@@ -128,6 +128,24 @@ public:
             }
         }
     }
+    
+    int altura(Node* t){
+        if(t->getIzq() == NULL && t->getDer() == NULL){
+            return 0;
+        }else{
+            if(t->getIzq() != NULL && t->getDer() == NULL){
+                return 1 + altura(t->getIzq());
+            }else{
+                if(t->getIzq() == NULL && t->getDer() != NULL){
+                    return 1 + altura(t->getDer());
+                }else{
+                    if(t->getIzq() != NULL && t->getDer() != NULL){
+                        return 1 + altura(t->getIzq()) + altura(t->getDer());
+                    }
+                }
+            }
+        }
+    }
 
     
     
@@ -145,6 +163,7 @@ int main()
     t.addr(41);
     
     t.preorder();
+
     
     return 0;
 }
