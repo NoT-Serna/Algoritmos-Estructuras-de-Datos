@@ -66,6 +66,47 @@ class Tree {
   Node* root;
 
  public:
+ 
+ int getHeight(Node* r) {
+    if (r == NULL) {
+      return 0;
+    } else {
+      return 1 + max(getHeight(r->getIzq()), getHeight(r->getDer()));
+    }
+  }
+
+  int getHeight() { 
+      return getHeight(root); 
+      
+  }
+
+  bool isBalanced(Node* r) {
+    return abs(getHeight(r->getIzq()) - getHeight(r->getDer())) <= 1;
+  }
+
+  bool isBalanced() { 
+      return isBalanced(root); 
+      
+  }
+
+  bool isIzqHeavy(Node* r) {
+    return getHeight(r->getIzq()) - getHeight(r->getDer()) > 1;
+  }
+
+  bool isIzqHeavy() { 
+      return isIzqHeavy(root);
+      
+  }
+
+  bool isDerHeavy(Node* r) {
+    return getHeight(r->getIzq()) - getHeight(r->getDer()) < -1;
+  }
+
+  bool isDerHeavy() { 
+      return isDerHeavy(root); 
+      
+  }
+ 
   void addr(int d) {
     if (root != NULL)
       addr(d, root, root);
@@ -148,45 +189,7 @@ class Tree {
     }
   }
 
-  int getHeight(Node* r) {
-    if (r == NULL) {
-      return 0;
-    } else {
-      return 1 + max(getHeight(r->getIzq()), getHeight(r->getDer()));
-    }
-  }
-
-  int getHeight() { 
-      return getHeight(root); 
-      
-  }
-
-  bool isBalanced(Node* r) {
-    return abs(getHeight(r->getIzq()) - getHeight(r->getDer())) <= 1;
-  }
-
-  bool isBalanced() { 
-      return isBalanced(root); 
-      
-  }
-
-  bool isIzqHeavy(Node* r) {
-    return getHeight(r->getIzq()) - getHeight(r->getDer()) > 1;
-  }
-
-  bool isIzqHeavy() { 
-      return isIzqHeavy(root);
-      
-  }
-
-  bool isDerHeavy(Node* r) {
-    return getHeight(r->getIzq()) - getHeight(r->getDer()) < -1;
-  }
-
-  bool isDerHeavy() { 
-      return isDerHeavy(root); 
-      
-  }
+  
 
   Node* parent(int ch, Node* t) {
     if (t == NULL) {
@@ -243,7 +246,10 @@ class Tree {
     }
   }
 
-  void preorder() { preorder(root); }
+  void preorder() { 
+      preorder(root); 
+      
+  }
 
   void preorder(Node* r) {
     if (r != NULL) {
@@ -253,7 +259,10 @@ class Tree {
     }
   }
 
-  void inorder() { inorder(root); }
+  void inorder() { 
+      inorder(root); 
+      
+  }
 
   void inorder(Node* n) {
     if (n == NULL) return;
@@ -264,52 +273,64 @@ class Tree {
 };
 
 int main() {
-  // Write C++ code here
   Tree tree = Tree();
-
+    
+  /*
   //ROTACION IZQUIERDA-IZQUIERDA
   tree.addr(15);
   tree.addr(10);
   tree.addr(20);
   tree.addr(5);
   tree.preorder();
-
-  // tree.addr(3);
-  // cout << endl;
-  // tree.preorder();
-
+  cout<<endl;
+  tree.inorder();
+  
+   tree.addr(3);
+   cout<<endl;
+   tree.preorder();
+   cout<<endl;
+   tree.inorder();
+    */
   // ROTACION DERECHA-DERECHA
-  // tree.addr(15);
-  // tree.addr(10);
-  // tree.addr(20);
-  // tree.addr(25);
-  // tree.preorder();
+  /*
+    tree.addr(15);
+    tree.addr(10);
+    tree.addr(20);
+    tree.addr(25);
+    tree.preorder();
 
-  // tree.addr(30);
-  // cout << endl;
-  // tree.preorder();
-
+    tree.addr(30);
+    cout << endl;
+    tree.preorder();
+    cout<<endl;
+    tree.inorder();
+    */
   // ROTACION IZQUIERDA-DERECHA
-  // tree.addr(15);
-  // tree.addr(10);
-  // tree.addr(20);
-  // tree.addr(5);
-  // tree.preorder();
+   /*
+    tree.addr(15);
+    tree.addr(10);
+    tree.addr(20);
+    tree.addr(5);
+    tree.preorder();
 
-  // tree.addr(8);
-  // cout << endl;
-  // tree.preorder();
-
+    tree.addr(8);
+    cout << endl;
+    tree.preorder();
+    cout<<endl;
+    tree.inorder();
+    */
   // ROTACION DERECHA-IZQUIERDA
-  // tree.addr(15);
-  // tree.addr(10);
-  // tree.addr(20);
-  // tree.addr(25);
-  // tree.preorder();
+     tree.addr(15);
+     tree.addr(10);
+     tree.addr(20);
+     tree.addr(25);
+     tree.preorder();
 
-  // tree.addr(22);
-  // cout << endl;
-  // tree.preorder();
+     tree.addr(22);
+     cout << endl;
+     tree.preorder();
+     cout<<endl;
+     tree.inorder();
 
   return 0;
-}       
+}  
