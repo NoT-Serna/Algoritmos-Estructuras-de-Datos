@@ -1,0 +1,45 @@
+#include <iostream>
+
+// Function to double the size of an array
+void doubleArraySize(int*& arr, int& size) {
+    // Create a new array with double the size
+    int newSize = size * 2;
+    int* newArr = new int[newSize];
+
+    // Copy elements from the old array to the new array
+    for (int i = 0; i < size; ++i) {
+        newArr[i] = arr[i];
+    }
+
+    // Delete the old array
+    delete[] arr;
+
+    // Update the array pointer and size
+    arr = newArr;
+    size = newSize;
+}
+
+int main() {
+    int size = 5;
+    int* arr = new int[size];
+
+    // Fill the array with some values
+    for (int i = 0; i < size; ++i) {
+        arr[i] = i + 1;
+    }
+
+    // Double the size of the array
+    doubleArraySize(arr, size);
+
+    // Print the new array
+    std::cout << "New array after doubling size:\n";
+    for (int i = 0; i < size; ++i) {
+        std::cout << arr[i] << " ";
+    }
+    std::cout << std::endl;
+
+    // Don't forget to delete the array when done
+    delete[] arr;
+
+    return 0;
+}
