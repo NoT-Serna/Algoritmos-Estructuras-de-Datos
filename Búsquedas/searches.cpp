@@ -61,3 +61,11 @@ int main() {
     cout<<binary(vector,10,9);
     return 0;
 }
+/*
+int main() {
+   int vector[] = {100,200,300,400,500,600,700,800,900,1000,2000,3000,4000,5000}; // Array that will be searched
+   int vi[] = {0,4,5}; // Partitions of the array
+    cout<<index(vector,13,vi,3,1000);  // (13 = size of the main array, 3= the amount of partitions of the array, 1000= searched value)
+    return 0;
+}
+*/
