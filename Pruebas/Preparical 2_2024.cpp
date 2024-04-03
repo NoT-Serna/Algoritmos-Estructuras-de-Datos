@@ -65,6 +65,44 @@ void PairSum(vector<int>&v , int obj){
     }
 }
 
+//Problema 3
+
+void printMovies(vector<pair<string,int>>& m){
+     for (const auto& movie : m) {
+        cout << movie.first << " (" << movie.second << ")" << endl;
+    }
+     cout<<endl;
+}
+
+void OrderMovie(vector<pair<string,int>>& m){
+    int temp, j;
+    for(j=0; j<m.size(); j++){
+      for(int i = 0; i<m.size()-1; i++){
+        if(m[i].second > m[i+1].second){
+          swap(m[i],m[i+1]);
+        }
+      }
+    }
+}
+
+int SearchMovie(vector<pair<string,int>>& m, int size, int section[], int paritions, int search){
+    int k = search/1000;
+    int i = section[k];
+    int j = section[k+1];
+    while(i<j && m[i].second != search){
+        i++;
+    }
+    if(i<j){
+      cout << "Movie Found: " << m[i].first << " (" << m[i].second << ")" << endl;
+      return i;
+
+    }else{
+      cout<<"Movie Not Found";
+      return -1;
+    }
+}
+
+
 
 
 
@@ -80,12 +118,49 @@ int main() {
     }
     
     print(vec);
+    cout<<endl;
+
+    vector<pair<string,int>> movies;
+        // Add movies to the vector using push_back
+    movies.push_back(make_pair("The Shawshank Redemption", 9));
+    movies.push_back(make_pair("The Godfather", 10));
+    movies.push_back(make_pair("The Dark Knight", 10));
+    movies.push_back(make_pair("Pulp Fiction", 8));
+    movies.push_back(make_pair("The Flash", 6));
+    movies.push_back(make_pair("Star Wars Ep:8", 5));
+    movies.push_back(make_pair("American Sniper", 9));
+    movies.push_back(make_pair("The Conjuring", 5));
+    movies.push_back(make_pair("The Lord of the Rings: The Return of the King", 8));
+
+    // Display the movies
+    cout << "----Movies in the vector:-----" << endl;
+    printMovies(movies);
+    OrderMovie(movies);
+    cout <<"----Movies Rating----" <<endl;
+    printMovies(movies);
+
+    
+    int section[] = {0,3,5};
+    // Movie Index Search
+    int index = SearchMovie(movies,8,section,3, 6);
+
+    if(index !=-1){
+
+    }else{
+
+    }
+
+
+
+
     
     cout<<endl;
     //Problema 2
+    /*
     bubble_sort(vec);
     PairSum(vec,8);
     print(vec);
+    */
     
     
     
