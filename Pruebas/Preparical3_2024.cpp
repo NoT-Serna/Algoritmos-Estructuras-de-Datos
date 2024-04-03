@@ -88,3 +88,72 @@ int main() {
 
     return 0;
 }
+
+/*
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+struct Student {
+    string name;
+    double grade;
+
+    Student(string n, double g) : name(n), grade(g) {}
+
+    bool operator<(const Student& other) const {
+        return grade < other.grade;
+    }
+};
+
+int partitionStudents(vector<Student>& students, int ini, int fin) {
+    int pivot = students[fin].grade;
+    int i = ini - 1;
+
+    for (int j = ini; j < fin; j++) {
+        if (students[j].grade <= pivot) {
+            i++;
+            swap(students[i], students[j]);
+        }
+    }
+    swap(students[i + 1], students[fin]);
+    return i + 1;
+}
+
+
+void quicksort(vector<Student>& students, int ini, int fin) {
+    if (ini < fin) {
+        int i = partitionStudents(students, ini, fin);
+        quicksort(students, ini, i - 1);
+        quicksort(students, i + 1, fin);
+    }
+}
+
+
+void printStudents(const vector<Student>& students) {
+    for (const auto& student : students) {
+        cout << student.name << " " << student.grade << endl;
+    }
+    cout << "-----------------------------" << endl;
+}
+
+int main() {
+    vector<vector<Student>> testCases = {
+        {{"Juan", 85.5}, {"Ana", 90.2}, {"Carlos", 85.5}},
+        {{"Bob", 75.0}, {"Alice", 85.0}, {"Charlie", 95.0}, {"Diana", 85.0}},
+        {{"Eve", 60.5}, {"Frank", 60.5}, {"Grace", 60.5}},
+        {{"Heidi", 88.8}, {"Ivan", 88.8}, {"Judy", 99.0}},
+        {{"Ken", 100.0}, {"Leo", 58.3}, {"Mia", 58.3}, {"Nina", 100.0}, {"Oscar", 58.3}}
+    };
+
+    for (auto& test : testCases) {
+        quicksort(test, 0, test.size() - 1);
+        printStudents(test);
+    }
+
+    return 0;
+}
+
+*/
