@@ -104,16 +104,20 @@ struct Student {
     Student(string n, double g) : name(n), grade(g) {}
 
     bool operator<(const Student& other) const {
-        return grade < other.grade;
+        if (grade == other.grade) {
+            return name < other.name;
+        }
+        return grade > other.grade;
     }
+
 };
 
 int partitionStudents(vector<Student>& students, int ini, int fin) {
-    int pivot = students[fin].grade;
+    Student pivot = students[fin];
     int i = ini - 1;
 
     for (int j = ini; j < fin; j++) {
-        if (students[j].grade <= pivot) {
+        if (students[j] < pivot) {
             i++;
             swap(students[i], students[j]);
         }
