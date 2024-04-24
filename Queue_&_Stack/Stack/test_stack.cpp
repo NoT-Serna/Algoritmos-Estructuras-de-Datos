@@ -1,6 +1,8 @@
 #include <iostream>
 #include "stack_1.h"
+#include "queue_1.h"
 #include <unordered_map>
+#include <stack>
 using namespace std;
 
 //Problema 4
@@ -31,6 +33,42 @@ bool isValid(string s) {
     return parentheses_stack.isEmpty();
 }
 
+int minValue(Stack<int>& A){
+    int min = A.top();
+    while(!A.isEmpty()){
+        int current = A.top();
+        if(current < min ){
+            min = current;
+        }
+        A.pop();
+    }
+    return min;
+}
+
+stack<int> inverted(stack<int>& A){
+    Stack<int> inverted;
+    while(!A.empty()){
+        inverted.push(A.top());
+        A.pop();
+    }
+
+
+    while(!inverted.isEmpty()){
+        A.push(inverted.top());
+        inverted.pop();
+    }
+
+    return A;
+}
+
+Queue<int> Reverse(Queue<int>&B, int target){
+    while(!B.isEmpty()){
+        
+    }
+}
+
+
+
 int main() {
     string input = "({})";
 
@@ -40,5 +78,16 @@ int main() {
         cout << "La cadena de paréntesis no es válida." << endl;
     }
 
+    Stack<int> stack_1;
+    stack_1.push(5);
+    stack_1.push(2);
+    stack_1.push(8);
+    stack_1.push(3);
+    stack_1.push(17);
+
+    int min = minValue(stack_1);
+    cout<<"Min value: "<<min<<endl;
+
     return 0;
+}
 }
