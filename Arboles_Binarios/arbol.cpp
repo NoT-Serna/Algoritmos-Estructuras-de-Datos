@@ -159,6 +159,7 @@ public:
         }
     }
 
+
     
     
 };
@@ -174,7 +175,7 @@ int main()
     t.addr(21);
     t.addr(41);
     
-    t.preorder();
+    t.inorder();
 
     
     return 0;
