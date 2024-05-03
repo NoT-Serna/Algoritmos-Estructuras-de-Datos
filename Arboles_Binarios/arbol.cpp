@@ -116,6 +116,18 @@ public:
     cout << n->getData() << "\t";
     inorder(n->getDer());
   }
+  
+  void postorder(){
+      postorder(root);
+  }
+  
+  void postorder(Node* p){
+      if(p != NULL){
+          postorder(p->getIzq());
+          postorder(p->getDer());
+          cout<<p->getData()<<"\t";
+      }
+  }
     
   void addr(int d){
       if(root != NULL)
@@ -175,7 +187,7 @@ int main()
     t.addr(21);
     t.addr(41);
     
-    t.inorder();
+    t.postorder();
 
     
     return 0;
