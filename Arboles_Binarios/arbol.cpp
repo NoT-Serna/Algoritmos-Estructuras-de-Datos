@@ -104,6 +104,18 @@ public:
           preorder(r->getDer());
       }
   }
+
+  void inorder() { 
+      inorder(root); 
+      
+  }
+
+  void inorder(Node* n) {
+    if (n == NULL) return;
+    inorder(n->getIzq());
+    cout << n->getData() << "\t";
+    inorder(n->getDer());
+  }
     
   void addr(int d){
       if(root != NULL)
