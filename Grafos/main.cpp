@@ -104,8 +104,8 @@ int main() {
     cout << "Vecinos de los nodos y peso de las aristas:" << std::endl;
     for (Node *node : g.getNodes()) {
         cout << "Vecinos de " << node->name << ": ";
-        for (const auto &neighbor : node->vecinos) {
-            cout << neighbor.first->name << " (peso: " << neighbor.second << "), ";
+        for (const auto &vecino : node->vecinos) {
+            cout << vecino.first->name << " (peso: " << vecino.second << "), ";
         }
         cout << std::endl;
     }
