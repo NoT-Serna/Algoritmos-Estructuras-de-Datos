@@ -30,10 +30,10 @@ public:
         // Check if the node already exists
         for (Node *node : nodes) {
             if (node->name == name) {
-                return node; // Node already exists, return it
+                return node; // Retornar el nodo si existe
             }
         }
-        // If the node doesn't exist, create and add it
+        //Creación de nodos
         Node *node = new Node();
         node->name = name;
         nodes.insert(node);
@@ -56,16 +56,16 @@ void readGraph(SimpleGraph &g, istream &infile) {
     std::string line;
     while (getline(infile, line)) {
         istringstream iss(line);
-        string node1, flecha, node2; // Changed from arrow to flecha
+        string node1, flecha, node2; 
         int weight = 0; // Inicializar el peso con un valor predeterminado
         if (iss >> node1) {
-            if (iss >> flecha >> node2 >> weight) { // Changed from arrow to flecha
+            if (iss >> flecha >> node2 >> weight) {
                 Node *n1 = g.addNode(node1);
                 Node *n2 = g.addNode(node2);
-                if (flecha == "-") { // Changed from arrow to flecha
+                if (flecha == "-") { 
                     g.addArc(n1, n2, weight);
                     g.addArc(n2, n1, weight);
-                } else if (flecha == "->") { // Changed from arrow to flecha
+                } else if (flecha == "->") { 
                     g.addArc(n1, n2, weight);
                 } else {
                     cerr << "Formato de flecha no válido: " << flecha << std::endl;
